@@ -1,0 +1,25 @@
+<section class="signin-section">
+    <img class="insta-logo"  src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="No image found"/>
+    <form class="signin-form" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+        <div>
+            <input class="form-input" type="text" formControlName="email" placeholder="Email" autocomplete="off" required>
+            <div class="text-danger" *ngIf="signinForm.get('email')?.errors?.required && signinFormControl.email.touched">
+                <small style="color: red;">email is required</small>
+            </div>
+        </div>
+        <div>
+            <input class="form-input" type="password" formControlName="password" placeholder="Password" autocomplete="off" required>
+            <div class="text-danger" *ngIf="signinForm.get('password')?.errors?.required && signinFormControl.password.touched">
+                <small style="color: red;">password is required</small>
+            </div>
+        </div>
+        <div style="padding-top: 0.6vw;">
+            <button [ngClass]="{'enabled': signinForm.valid, 'disabled' : !signinForm.valid }"  class="form-input" type="submit">Log In</button>
+        </div>
+    </form>
+   <div class="links">
+        <small (click)="navigateToForgot()" class="forgot">Forgot password?</small>
+        <div (click)="navigateToSignup()" class="other-link">Don't have an account?<span style="color:#3399ff; cursor: pointer;">&nbsp;Sign up</span></div>
+   </div>
+</section>
+

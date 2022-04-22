@@ -1,0 +1,31 @@
+<section class="signup-section">
+    <img class="insta-logo"  src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="No image found"/>
+    <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div>
+            <input class="form-input" type="text" formControlName="name" placeholder="Name" autocomplete="off" required>
+            <div class="text-danger" *ngIf="signupForm.get('name')?.errors?.required && signupFormControl.name.touched">
+                <small style="color: red;">name is required</small>
+            </div>
+        </div>
+        <div>
+            <input class="form-input" type="text" formControlName="email" placeholder="Email" autocomplete="off" required>
+            <div class="text-danger" *ngIf="signupForm.get('email')?.errors?.required && signupFormControl.email.touched">
+                <small style="color: red;">email is required</small>
+            </div>
+        </div>
+        <div>
+            <input class="form-input" type="password" formControlName="password" placeholder="Password" autocomplete="off" required>
+            <div class="text-danger" *ngIf="signupForm.get('password')?.errors?.required && signupFormControl.password.touched">
+                <small style="color: red;">password is required</small>
+            </div>
+        </div>
+        <div style="padding-top: 0.6vw;">
+            <button [ngClass]="{'enabled': signupForm.valid, 'disabled' : !signupForm.valid }"  class="form-input" type="submit">Sign up</button>
+        </div>
+    </form>
+   <div class="links">
+        <div (click)="navigateToSignin()" class="other-link">Have an account?<span style="color:#3399ff; cursor: pointer;">&nbsp;Sign in</span></div>
+   </div>
+</section>
+
+
