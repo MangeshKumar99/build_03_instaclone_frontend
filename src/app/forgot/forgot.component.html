@@ -1,23 +1,6 @@
-<!-- <section class="forgot-section">
-    <img class="insta-logo"  src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="No image found"/>
-    <form class="forgot-form" [formGroup]="forgotForm" (ngSubmit)="onSubmit()">
-        <div>
-            <input class="form-input" type="text" formControlName="email" placeholder="Email" autocomplete="off" required>
-            <div class="text-danger" *ngIf="forgotForm.get('email')?.errors?.required && forgotFormControl.email.touched">
-                <small style="color: red;">email is required</small>
-            </div>
-        </div>
-        <div style="padding-top: 0.6vw;">
-            <button [ngClass]="{'enabled': forgotForm.valid, 'disabled' : !forgotForm.valid }"  class="form-input" type="submit">Send Link</button>
-        </div>
-        <div class="links">
-            <small style="cursor: pointer; text-decoration: underline;" (click)="navigateToSignin()">Back to Signin</small>
-       </div>
-    </form>
-</section> -->
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
-        <div class="col-8 col-lg-3 col-md-4">
+        <div class="col-10 col-lg-3 col-md-5 col-sm-8">
             <div class="text-center mb-2">
                 <img class="img-fluid" src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="No image found"/>
             </div>
