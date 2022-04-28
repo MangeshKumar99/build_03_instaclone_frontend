@@ -1,4 +1,4 @@
-<section class="forgot-section">
+<!-- <section class="forgot-section">
     <img class="insta-logo"  src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="No image found"/>
     <form class="forgot-form" [formGroup]="forgotForm" (ngSubmit)="onSubmit()">
         <div>
@@ -14,6 +14,30 @@
             <small style="cursor: pointer; text-decoration: underline;" (click)="navigateToSignin()">Back to Signin</small>
        </div>
     </form>
-</section>
+</section> -->
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-8 col-lg-3 col-md-4">
+            <div class="text-center mb-2">
+                <img class="img-fluid" src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="No image found"/>
+            </div>
+            <form [formGroup]="forgotForm" (ngSubmit)="onSubmit()">
+                <div class="form-group mb-2">
+                    <input type="password" class="form-control" formControlName="email" placeholder="Email" autocomplete="off" required>
+                    <div *ngIf="forgotForm.get('email')?.errors?.required && forgotFormControl.email.touched">
+                        <small style="color: red;">email is required</small>
+                    </div>
+                </div> 
+                <div class="d-grid mt-2">
+                    <button [ngClass]="{'enabled': forgotForm.valid, 'disabled' : !forgotForm.valid }"  type="submit" class="btn btn-primary">Reset Password</button>
+                </div>
+            </form>
+            <div class="text-center mt-4">
+                <small style="cursor: pointer; text-decoration: underline;" (click)="navigateToSignin()">Back to Signin</small>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
