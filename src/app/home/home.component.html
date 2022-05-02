@@ -1,1 +1,33 @@
-<p>home works!</p>
+<div class="container">
+    <div class="row justify-content-center align-items-center pt-4">
+        <div class="col-12 col-lg-5 col-md-10 col-sm-11">
+            <div *ngFor="let post of postsArray">
+                <div class="d-flex align-items-center gap-2">
+                    <img class="img-fluid userlogo"
+                        src="https://www.kindpng.com/picc/m/276-2764257_instagram-icon-instagram-logo-small-size-hd-png.png" />
+                    <div class="username">{{post.postedBy.name}}</div>
+                </div>
+                <img class="img-fluid pt-1 userpost"
+                    src="https://images.unsplash.com/photo-1604537529586-87ac173f4310?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80">
+                <div class="d-inline align-items-center gap-2">
+                    <div class="d-flex align-items-center gap-2 pt-1">
+                        <div class="username">{{post.postedBy.name}}</div>
+                        <div class="post-title">{{post.title}}</div>
+                    </div>
+                    <div class="post-description pt-1">
+                        {{post.description}}
+                    </div>
+                </div>
+                <div class="d-inline align-items-center gap-2 pt-1">
+                    <div *ngFor="let comment of post.comments">
+                        <div class="username">{{comment.commentedBy}}</div>
+                        <div class="comment-content">
+                            {{comment.comment}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

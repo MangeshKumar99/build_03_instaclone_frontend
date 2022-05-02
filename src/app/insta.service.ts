@@ -21,5 +21,7 @@ export class InstaService {
   resetPassword(email:any,payload:any){
     return this.http.post(`${this.COMMON_URL}resetpassword/${email}`,payload);
   }
-
+  getAllPosts(){
+    return this.http.get(`${this.COMMON_URL}posts`);
+  }
 }
