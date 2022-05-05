@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
     this.instaService.getAllPosts().subscribe(
       (res: any) => {
         console.log(res);
-        console.log(res.result.comments);
         this.postsArray = res.result;
       },
       (error) => {

@@ -8,7 +8,7 @@
                     <div class="username">{{post.postedBy.name}}</div>
                 </div>
                 <img class="img-fluid pt-1 userpost"
-                    src="https://images.unsplash.com/photo-1604537529586-87ac173f4310?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80">
+                    src="http://localhost:1313/api/post/photo/{{post._id}}">
                 <div class="d-inline align-items-center gap-2">
                     <div class="d-flex align-items-center gap-2 pt-1">
                         <div class="username">{{post.postedBy.name}}</div>
@@ -20,10 +20,10 @@
                 </div>
                 <div class="d-inline align-items-center gap-2 pt-1">
                     <div *ngFor="let comment of post.comments">
-                        <div class="username">{{comment.commentedBy}}</div>
-                        <div class="comment-content">
+                        <span class="username">{{comment.commentedBy}}</span>
+                        <span class="comment-content">
                             {{comment.comment}}
-                        </div>
+                        </span>
                     </div>
                 </div>
                 <br>
