@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPosts();
-    
   }
   loadPosts() {
     this.instaService.getAllPosts().subscribe(
