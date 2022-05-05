@@ -9,11 +9,12 @@ import { InstaService } from '../insta.service';
 })
 export class HomeComponent implements OnInit {
   postsArray: any = [];
-  
+
   constructor(private instaService: InstaService) {}
 
   ngOnInit(): void {
     this.loadPosts();
+    
   }
   loadPosts() {
     this.instaService.getAllPosts().subscribe(
