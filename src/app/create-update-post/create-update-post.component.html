@@ -1,0 +1,33 @@
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-lg-3 col-md-5 col-sm-8">
+            <div class="text-center mb-2">
+                <img class="img-fluid" src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="No image found"/>
+            </div>
+            <form [formGroup]="createPostForm" (ngSubmit)="onSubmit()">
+                <div class="form-group mb-2">
+                    <input type="text" class="form-control" formControlName="title" placeholder="Title" autocomplete="off" required>
+                    <div *ngIf="createPostForm.get('title')?.errors?.required && createPostFormControl.title.touched">
+                        <small style="color: red;">title is required</small>
+                    </div>
+                </div> 
+                <div class="form-group mb-2">
+                    <textarea type="text" class="form-control" formControlName="description" placeholder="Description" autocomplete="off" required></textarea>
+                    <div *ngIf="createPostForm.get('description')?.errors?.required && createPostFormControl.description.touched">
+                        <small style="color: red;">description is required</small>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <input (change)="handleFileInput($event)" type="file" class="form-control" formControlName="photo" required>
+                    <div *ngIf="createPostForm.get('photo')?.errors?.required && createPostFormControl.photo.touched">
+                        <small style="color: red;">photo is required</small>
+                    </div>
+                </div>
+                <div class="d-grid mt-2">
+                    <button [ngClass]="{'enabled': createPostForm.valid, 'disabled' : !createPostForm.valid }"  type="submit" class="btn btn-primary">{{postId ? 'Update Post' : 'Create Post'}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

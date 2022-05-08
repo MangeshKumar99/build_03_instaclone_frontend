@@ -9,10 +9,15 @@ import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { HomeComponent } from './home/home.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { ResetComponent } from './reset/reset.component';
+import { CreateUpdatePostComponent } from './create-update-post/create-update-post.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 
 @NgModule({
@@ -23,7 +28,9 @@ import { ResetComponent } from './reset/reset.component';
     HeaderComponent,
     HomeComponent,
     ForgotComponent,
-    ResetComponent
+    ResetComponent,
+    CreateUpdatePostComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +38,9 @@ import { ResetComponent } from './reset/reset.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

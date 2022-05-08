@@ -1,1 +1,10 @@
-<p>header works!</p>
+<mat-toolbar class="insta-navbar">
+    <img class="img-fluid" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"/>
+    <span class="example-spacer"></span>
+    <mat-icon style="cursor:pointer" [matMenuTriggerFor]="menu">account_circle</mat-icon>
+    <mat-menu #menu="matMenu">
+        <button (click)="navigateToMyprofile()" mat-menu-item>My Profile</button>
+        <button (click)="navigateToCreateUpdatePost()" mat-menu-item>Create Post</button>
+        <button (click)="signoutUser()" mat-menu-item>Signout</button>
+    </mat-menu>
+</mat-toolbar>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -23,5 +23,24 @@ export class InstaService {
   }
   getAllPosts(){
     return this.http.get(`${this.COMMON_URL}posts`);
+  }
+  createPost(userId:any,token:any,payload:any){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(`${this.COMMON_URL}post/create/${userId}`,payload,{headers: headers});
+  }
+  signout(){
+    return this.http.get(`${this.COMMON_URL}signout`);
+  }
+  updateLikeCount(postId:any,userId:any,token:any){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
+    return this.http.get(`${this.COMMON_URL}post/like/${postId}/${userId}`,{headers: headers});
+  }
+  deletePost(postId:any,userId:any,token:any){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
+    return this.http.delete(`${this.COMMON_URL}post/${postId}/${userId}`,{headers: headers})
+  }
+  updatePost(userId:any,postId:any,token:any,payload:any){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${this.COMMON_URL}post/${postId}/${userId}`,payload,{headers: headers});
   }
 }
