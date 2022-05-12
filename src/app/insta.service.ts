@@ -43,4 +43,15 @@ export class InstaService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put(`${this.COMMON_URL}post/${postId}/${userId}`,payload,{headers: headers});
   }
+  postComment(userId:any,postId:any,token:any,payload:any){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
+    return this.http.post(`${this.COMMON_URL}comment/create/${postId}/${userId}`,payload,{headers: headers});
+  }
+  deleteComment(commentId:any,postId:any,userId:any,token:any){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
+    return this.http.get(`${this.COMMON_URL}comment/delete/${commentId}/${postId}/${userId}`,{headers: headers});
+  }
+  getLoggedInUser(loggedInUser:any){
+    return this.http.get(`${this.COMMON_URL}user/${loggedInUser}`);
+  }
 }

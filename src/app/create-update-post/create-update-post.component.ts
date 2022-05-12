@@ -34,7 +34,7 @@ export class CreateUpdatePostComponent implements OnInit {
   onSubmit() {
     let formData = new FormData();
     formData.append("title", this.createPostForm.value.title);
-    formData.append("description", this.createPostForm.value.title);
+    formData.append("description", this.createPostForm.value.description);
     formData.append("photo", this.photo);
     let userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(this.postId){

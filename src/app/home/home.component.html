@@ -6,17 +6,17 @@
                 <div class="d-flex align-items-center gap-2">
                     <img class="img-fluid userlogo"
                         src="https://www.kindpng.com/picc/m/276-2764257_instagram-icon-instagram-logo-small-size-hd-png.png" />
-                    <div class="username">{{post.postedBy.name}}</div>
+                    <div  class="username">{{post.postedBy.name}}</div>
                     <span class="example-spacer"></span>
-                    <mat-icon style="cursor:pointer" [matMenuTriggerFor]="menu"  *ngIf="loggedInUser==post.postedBy.email">more_vert</mat-icon>
+                    <mat-icon style="cursor:pointer" [matMenuTriggerFor]="menu"
+                        *ngIf="loggedInUser==post.postedBy.email">more_vert</mat-icon>
                     <mat-menu #menu="matMenu">
                         <button (click)="navigateToCreateUpdatePost(post)" mat-menu-item>Edit post</button>
                         <button (click)="deleteMyPost(post._id)" mat-menu-item>Delete Post</button>
                     </mat-menu>
                 </div>
-                <img class="img-fluid pt-1 userpost"
-                    src="http://localhost:1313/api/post/photo/{{post._id}}" />
-                <mat-icon style="cursor:pointer" (click)="updateLikes(post._id)" class="pt-1">favorite_border</mat-icon>
+                <img class="img-fluid pt-1 userpost" src="http://localhost:1313/api/post/photo/{{post._id}}" />
+                <mat-icon style="cursor:pointer;" (click)="updateLikes(post._id)" class="pt-1">favorite_border</mat-icon>
                 <div>{{post.likes.length}}&nbsp;likes</div>
                 <div class="d-inline align-items-center gap-2">
                     <div class="d-flex align-items-center gap-2 pt-1">
@@ -28,13 +28,24 @@
                     </div>
                 </div>
                 <div class="d-inline align-items-center gap-2 pt-1">
-                    <div *ngFor="let comment of post.comments.slice().reverse()">
+                    <div class="d-flex gap-2" *ngFor="let comment of post.comments.slice().reverse()">
                         <span class="username">{{comment.commentedBy}}</span>
                         <span class="comment-content">
                             {{comment.comment}}
                         </span>
+                        <span style="flex:1 1 auto;"></span>
+                        <mat-icon *ngIf="comment.commentedBy==loggedInUserName"style="cursor: pointer;" (click)="deleteMyComment(comment._id,post._id)">delete</mat-icon>
                     </div>
                 </div>
+                <form [formGroup]="commentForm" (ngSubmit)="onSubmit(post)">
+                    <div class="form-group mb-2">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" formControlName="comments"
+                                placeholder="Add a comment..." autocomplete="off">
+                            <button type="submit" class="input-group-text">Post</button>
+                        </div>
+                    </div>
+                </form>
                 <br>
             </div>
         </div>

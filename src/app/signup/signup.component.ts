@@ -28,6 +28,7 @@ export class SignupComponent implements OnInit {
       console.log(res);
       this.signupForm.reset();
       alert(res.message);
+      this.navigateToSignin();
     },(error)=>{
       alert(error.error.error);
     })

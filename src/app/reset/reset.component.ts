@@ -13,7 +13,6 @@ export class ResetComponent implements OnInit {
   constructor(private instaService:InstaService, private fb:FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem("email"));
   }
   resetForm = this.fb.group({
     password: ["", Validators.required],
