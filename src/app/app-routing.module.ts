@@ -7,6 +7,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ResetComponent } from './reset/reset.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   {path:'', component:SigninComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'reset',component:ResetComponent},
   {path:'home/createupdatepost',component:CreateUpdatePostComponent},
   {path:'home/myprofile',component:MyProfileComponent},
+  {path:'home/userprofile',component:UserProfileComponent},
 ];
 
 @NgModule({

@@ -18,6 +18,7 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { ResetComponent } from './reset/reset.component';
 import { CreateUpdatePostComponent } from './create-update-post/create-update-post.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     ForgotComponent,
     ResetComponent,
     CreateUpdatePostComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

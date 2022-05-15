@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit {
   loadPosts() {
     this.instaService.getAllPosts().subscribe(
       (res: any) => {
-        console.log(res);
         this.postsArray = res.result;
       },
       (error) => {
@@ -80,5 +79,8 @@ export class HomeComponent implements OnInit {
     },(error)=>{
       alert(error.error.error);
     })
+  }
+  navigateToUserProfile(post:any){
+    this.router.navigate(['/home/userprofile',{_id:post.postedBy._id}]);
   }
 }

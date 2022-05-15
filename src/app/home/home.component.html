@@ -6,7 +6,7 @@
                 <div class="d-flex align-items-center gap-2">
                     <img class="img-fluid userlogo"
                         src="https://www.kindpng.com/picc/m/276-2764257_instagram-icon-instagram-logo-small-size-hd-png.png" />
-                    <div  class="username">{{post.postedBy.name}}</div>
+                    <div (click)="navigateToUserProfile(post)" class="username">{{post.postedBy.name}}</div>
                     <span class="example-spacer"></span>
                     <mat-icon style="cursor:pointer" [matMenuTriggerFor]="menu"
                         *ngIf="loggedInUser==post.postedBy.email">more_vert</mat-icon>
