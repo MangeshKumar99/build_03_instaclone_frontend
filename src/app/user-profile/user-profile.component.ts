@@ -12,6 +12,7 @@ export class UserProfileComponent implements OnInit {
   postsArray:any=[];
   filteredPostsArray:any=[];
   userProfileDetails: any;
+  flag:any
 
   constructor(private instaService: InstaService, private route: ActivatedRoute) { }
 
@@ -19,17 +20,30 @@ export class UserProfileComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.userId=params._id;
     })
-    this.instaService.getLoggedInUser(this.userId).subscribe((res:any)=>{
+    this.instaService.getUser(this.userId).subscribe((res:any)=>{
       this.userProfileDetails=res;
     },(error)=>{
       alert(error.error.error);
     })
+    //logged in user details
+    setTimeout(()=>{
+      let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+      this.instaService.getUser(userObj.user._id).subscribe((res:any)=>{
+        if(res.following.includes(this.userProfileDetails?.email)){
+          this.flag=true;
+        }
+        else{
+          this.flag=false;
+        }
+      },(error)=>{
+        alert(error.error.error);
+      })
+    },100)
     this.loadPosts();
   }
   loadPosts() {
     this.instaService.getAllPosts().subscribe(
       (res: any) => {
-        console.log(res);
         this.postsArray = res.result;
         this.filterPostsArray();
       },
@@ -39,10 +53,20 @@ export class UserProfileComponent implements OnInit {
     );
   }
   filterPostsArray(){
+    this.filteredPostsArray=[];
     for(let i=0;i<this.postsArray.length;i++){
       if(this.postsArray[i].postedBy._id==this.userId){
         this.filteredPostsArray.push(this.postsArray[i]);
       }
     }
+  }
+  updateFollow(){
+    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    this.instaService.updateFollow(userObj.user._id,this.userProfileDetails._id,userObj.token).subscribe((res)=>{
+      console.log(res);
+      this.ngOnInit();
+    },(error)=>{
+      console.log(error);
+    })
   }
 }

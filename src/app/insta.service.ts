@@ -51,7 +51,11 @@ export class InstaService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
     return this.http.get(`${this.COMMON_URL}comment/delete/${commentId}/${postId}/${userId}`,{headers: headers});
   }
-  getLoggedInUser(loggedInUser:any){
+  getUser(loggedInUser:any){
     return this.http.get(`${this.COMMON_URL}user/${loggedInUser}`);
+  }
+  updateFollow(userId1:any,userId2:any,token:any){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
+    return this.http.get(`${this.COMMON_URL}user/update/follow/${userId1}/${userId2}`,{headers: headers});
   }
 }

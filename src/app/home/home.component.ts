@@ -81,6 +81,13 @@ export class HomeComponent implements OnInit {
     })
   }
   navigateToUserProfile(post:any){
-    this.router.navigate(['/home/userprofile',{_id:post.postedBy._id}]);
+    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    if(userObj.user._id==post.postedBy._id){
+      this.router.navigate(['/home/myprofile']);
+    }
+    else{
+      this.router.navigate(['/home/userprofile',{_id:post.postedBy._id}]);
+    }
+   
   }
 }

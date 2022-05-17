@@ -14,7 +14,7 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     let userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    this.instaService.getLoggedInUser(userObj.user._id).subscribe((res:any)=>{
+    this.instaService.getUser(userObj.user._id).subscribe((res:any)=>{
       this.myProfileDetails=res;
       this.getPosts();
     },(error)=>{
