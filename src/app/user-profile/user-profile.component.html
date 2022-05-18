@@ -11,11 +11,11 @@
                         <div class="text-center h2">{{userProfileDetails?.postsCount}}</div>
                         <div>Posts</div>
                     </div>
-                    <div class="d-inline">
+                    <div (click)="navigateToDashboard({'followers':userProfileDetails?.followers})" style="cursor: pointer;" class="d-inline">
                         <div class="text-center h2">{{userProfileDetails?.followers?.length}}</div>
                         <div>Followers</div>
                     </div>
-                    <div class="d-inline">
+                    <div (click)="navigateToDashboard({'following':userProfileDetails?.following})" style="cursor: pointer;" class="d-inline">
                         <div class="text-center h2">{{userProfileDetails?.following?.length}}</div>
                         <div>Following</div>
                     </div>

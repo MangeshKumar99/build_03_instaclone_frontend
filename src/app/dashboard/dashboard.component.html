@@ -1,0 +1,15 @@
+<app-header></app-header>
+<div class="container pt-5">
+    <div class="row h-100 justify-content-center align-items-center pt-4">
+        <div class="col-10 col-lg-3 col-md-5 col-sm-8">
+            <h2 class="text-center">{{dashboardHeading}}</h2>
+            <div *ngFor="let i of dashboardArray">
+                <div class="d-flex justify-content-center align-items-center gap-3">
+                    <img class="img-fluid userlogo" src="https://www.kindpng.com/picc/m/276-2764257_instagram-icon-instagram-logo-small-size-hd-png.png" />
+                    <div class="email">{{i}}</div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

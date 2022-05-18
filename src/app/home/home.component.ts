@@ -88,6 +88,9 @@ export class HomeComponent implements OnInit {
     else{
       this.router.navigate(['/home/userprofile',{_id:post.postedBy._id}]);
     }
-   
+  }
+  navigateToDashboard(data:any){
+    const obj={likes:data};
+    this.router.navigate(['/home/dashboard',obj]);
   }
 }

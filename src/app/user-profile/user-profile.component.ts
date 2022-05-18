@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { InstaService } from '../insta.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class UserProfileComponent implements OnInit {
   userProfileDetails: any;
   flag:any
 
-  constructor(private instaService: InstaService, private route: ActivatedRoute) { }
+  constructor(private instaService: InstaService, private route: ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -41,7 +41,7 @@ export class UserProfileComponent implements OnInit {
     },100)
     this.loadPosts();
   }
-  loadPosts() {
+  loadPosts(){
     this.instaService.getAllPosts().subscribe(
       (res: any) => {
         this.postsArray = res.result;
@@ -68,5 +68,8 @@ export class UserProfileComponent implements OnInit {
     },(error)=>{
       console.log(error);
     })
+  }
+  navigateToDashboard(data:any){
+    this.router.navigate(['/home/dashboard',data]);
   }
 }

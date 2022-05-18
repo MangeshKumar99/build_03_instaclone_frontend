@@ -19,6 +19,7 @@ import { ResetComponent } from './reset/reset.component';
 import { CreateUpdatePostComponent } from './create-update-post/create-update-post.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ResetComponent,
     CreateUpdatePostComponent,
     MyProfileComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

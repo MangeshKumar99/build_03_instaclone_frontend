@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateUpdatePostComponent } from './create-update-post/create-update-post.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { HomeComponent } from './home/home.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'home/createupdatepost',component:CreateUpdatePostComponent},
   {path:'home/myprofile',component:MyProfileComponent},
   {path:'home/userprofile',component:UserProfileComponent},
+  {path:'home/dashboard',component:DashboardComponent},
 ];
 
 @NgModule({

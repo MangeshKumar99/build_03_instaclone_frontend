@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { InstaService } from '../insta.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class MyProfileComponent implements OnInit {
   myProfileDetails: any;
   filteredUsersPostsArray:any =[];
 
-  constructor(private instaService:InstaService) { }
+  constructor(private instaService:InstaService, private router:Router) { }
 
   ngOnInit(): void {
     let userObj = JSON.parse(localStorage.getItem('user') || '{}');
@@ -39,7 +40,9 @@ export class MyProfileComponent implements OnInit {
         this.filteredUsersPostsArray.push(userPosts[i]);
       }
     }
-    console.log(this.filteredUsersPostsArray);
   }
 
+  navigateToDashboard(data:any){
+    this.router.navigate(['/home/dashboard',data]);
+  }
 }
