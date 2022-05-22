@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { InstaService } from '../insta.service';
@@ -17,32 +18,49 @@ export class UserProfileComponent implements OnInit {
   constructor(private instaService: InstaService, private route: ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.userId=params._id;
-    })
-    this.instaService.getUser(this.userId).subscribe((res:any)=>{
-      this.userProfileDetails=res;
-    },(error)=>{
-      alert(error.error.error);
-    })
-    //logged in user details
-    setTimeout(()=>{
-      let userObj = JSON.parse(localStorage.getItem('user') || '{}');
-      this.instaService.getUser(userObj.user._id).subscribe((res:any)=>{
-        if(res.following.includes(this.userProfileDetails?.email)){
-          this.flag=true;
-        }
-        else{
-          this.flag=false;
-        }
+    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    let isEmpty = Object.keys(userObj).length === 0;
+    if(isEmpty){
+      this.router.navigate(['']);
+    }
+    if(!isEmpty){
+      this.instaService.checkUser(userObj.user._id,userObj.token).subscribe((res)=>{
+        this.route.params.subscribe((params: Params) => {
+          this.userId=params._id;
+        })
+        this.instaService.getUser(this.userId).subscribe((res:any)=>{
+          this.userProfileDetails=res;
+        },(error)=>{
+          alert(error.error.error);
+        })
+        //logged in user details
+        setTimeout(()=>{
+          let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+          this.instaService.getUser(userObj.user._id).subscribe((res:any)=>{
+            if(res.following.includes(this.userProfileDetails?.email)){
+              this.flag=true;
+            }
+            else{
+              this.flag=false;
+            }
+          },(error)=>{
+            alert(error.error.error);
+          })
+        },100)
+        this.loadPosts();
       },(error)=>{
-        alert(error.error.error);
+        if(error instanceof HttpErrorResponse){
+          if(error.status==401){
+            this.router.navigate(['']);
+            console.log(error);
+          }
+        }
       })
-    },100)
-    this.loadPosts();
+    }
   }
   loadPosts(){
-    this.instaService.getAllPosts().subscribe(
+    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    this.instaService.getAllPosts(userObj.user._id,userObj.token).subscribe(
       (res: any) => {
         this.postsArray = res.result;
         this.filterPostsArray();
@@ -71,5 +89,12 @@ export class UserProfileComponent implements OnInit {
   }
   navigateToDashboard(data:any){
     this.router.navigate(['/home/dashboard',data]);
+  }
+  extractInitials(name:any){
+    if(name){
+      let matches = name.match(/\b(\w)/g); 
+      let acronym = matches.join('');
+      return acronym;
+    }
   }
 }

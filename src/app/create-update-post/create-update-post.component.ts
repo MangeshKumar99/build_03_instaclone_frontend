@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -14,14 +15,32 @@ export class CreateUpdatePostComponent implements OnInit {
   constructor(private fb: FormBuilder, private instaService: InstaService, private router: Router,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-  
-    this.route.params.subscribe((params: Params) => {
-      this.postId=params._id
-      this.createPostForm.patchValue({
-        title: params.title, 
-        description: params.description
-      });
-    })
+    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    
+    let isEmpty = Object.keys(userObj).length === 0;
+    //Restricting the user from accessing this screen if he/she has not been authorized
+    //Thus navigating the user back to signin page
+    if(isEmpty){
+      this.router.navigate(['']);
+    }
+    if(!isEmpty){
+      this.instaService.checkUser(userObj.user._id,userObj.token).subscribe((res)=>{
+        this.route.params.subscribe((params: Params) => {
+          this.postId=params._id
+          this.createPostForm.patchValue({
+            title: params.title, 
+            description: params.description
+          });
+        })
+      },(error)=>{
+        if(error instanceof HttpErrorResponse){
+          if(error.status==401){
+            this.router.navigate(['']);
+            console.log(error);
+          }
+        }
+      })
+    }
   }
   createPostForm = this.fb.group({
     title: ["", Validators.required],

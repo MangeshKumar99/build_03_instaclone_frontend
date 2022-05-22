@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 import { CreateUpdatePostComponent } from './create-update-post/create-update-post.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ForgotComponent } from './forgot/forgot.component';
@@ -13,13 +14,13 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 const routes: Routes = [
   {path:'', component:SigninComponent},
   {path:'signup',component:SignupComponent},
-  {path:'home',component:HomeComponent},
+  {path:'home',component:HomeComponent, canActivate:[AuthGuard]},
   {path:'forgot',component:ForgotComponent},
   {path:'reset',component:ResetComponent},
-  {path:'home/createupdatepost',component:CreateUpdatePostComponent},
-  {path:'home/myprofile',component:MyProfileComponent},
-  {path:'home/userprofile',component:UserProfileComponent},
-  {path:'home/dashboard',component:DashboardComponent},
+  {path:'home/createupdatepost',component:CreateUpdatePostComponent, canActivate:[AuthGuard]},
+  {path:'home/myprofile',component:MyProfileComponent,canActivate:[AuthGuard]},
+  {path:'home/userprofile',component:UserProfileComponent,canActivate:[AuthGuard]},
+  {path:'home/dashboard',component:DashboardComponent,canActivate:[AuthGuard]},
 ];
 
 @NgModule({

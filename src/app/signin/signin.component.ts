@@ -25,7 +25,6 @@ export class SigninComponent implements OnInit {
   }
   onSubmit() {
     this.instaService.signinUser(this.signinForm.value).subscribe((res)=>{
-      console.log(res);
       localStorage.setItem("user",JSON.stringify(res));
       this.signinForm.reset();
       alert('Signin success!')

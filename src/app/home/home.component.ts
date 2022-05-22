@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,8 +20,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadPosts();
     let userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    this.loggedInUser = userObj.user.email;
-    this.loggedInUserName = userObj.user.name;
+    let isEmpty = Object.keys(userObj).length === 0;
+    if(!isEmpty){
+      this.loggedInUser = userObj.user.email;
+      this.loggedInUserName = userObj.user.name;
+    }
   }
   commentForm = this.fb.group({
     comments:['',Validators.required]
@@ -40,14 +44,26 @@ export class HomeComponent implements OnInit {
     }
   }
   loadPosts() {
-    this.instaService.getAllPosts().subscribe(
-      (res: any) => {
-        this.postsArray = res.result;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    let isEmpty = Object.keys(userObj).length === 0;
+    if(isEmpty){
+      this.router.navigate(['']);
+    }
+    if(!isEmpty){
+      this.instaService.getAllPosts(userObj.user._id,userObj.token).subscribe(
+        (res: any) => {
+          this.postsArray = res.result;
+        },
+        (error) => {
+          if(error instanceof HttpErrorResponse){
+            if(error.status==401){
+              this.router.navigate(['']);
+              console.log(error);
+            }
+          }
+        }
+      );
+    }
   }
   
   navigateToCreateUpdatePost(post:any){
@@ -92,5 +108,10 @@ export class HomeComponent implements OnInit {
   navigateToDashboard(data:any){
     const obj={likes:data};
     this.router.navigate(['/home/dashboard',obj]);
+  }
+  extractInitials(name:any){
+    let matches = name.match(/\b(\w)/g); 
+    let acronym = matches.join('');
+    return acronym;
   }
 }

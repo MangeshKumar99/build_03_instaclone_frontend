@@ -21,8 +21,9 @@ export class InstaService {
   resetPassword(email:any,payload:any){
     return this.http.post(`${this.COMMON_URL}resetpassword/${email}`,payload);
   }
-  getAllPosts(){
-    return this.http.get(`${this.COMMON_URL}posts`);
+  getAllPosts(userId:any,token:any){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
+    return this.http.get(`${this.COMMON_URL}posts/${userId}`,{headers: headers});
   }
   createPost(userId:any,token:any,payload:any){
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -57,5 +58,12 @@ export class InstaService {
   updateFollow(userId1:any,userId2:any,token:any){
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
     return this.http.get(`${this.COMMON_URL}user/update/follow/${userId1}/${userId2}`,{headers: headers});
+  }
+  loggedIn(){
+    return !!localStorage.getItem('user');
+  }
+  checkUser(userId:any,token:any){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
+    return this.http.get(`${this.COMMON_URL}check/${userId}`,{headers: headers});
   }
 }
