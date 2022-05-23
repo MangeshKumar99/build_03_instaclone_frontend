@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { InstaService } from '../insta.service';
 
 
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   loggedInUser: any;
   loggedInUserName: any;
 
-  constructor(private instaService: InstaService, private router: Router, private fb: FormBuilder) {}
+  constructor(private instaService: InstaService, private router: Router, private fb: FormBuilder, private toastr:ToastrService) {}
 
   ngOnInit(): void {
     this.loadPosts();
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit {
   });
   onSubmit(post:any){
     if(this.commentForm.value.comments==''){
-      alert('Comment is empty, type something and then post!')
+      this.toastr.info("Comment is empty","Info");
     }
     else{
       let userObj = JSON.parse(localStorage.getItem('user') || '{}');
@@ -83,17 +84,16 @@ export class HomeComponent implements OnInit {
     this.instaService.updateLikeCount(postId,userObj.user._id,userObj.token).subscribe((res)=>{
       this.ngOnInit();
     },(error)=>{
-      alert(error.error.error);
+      this.toastr.error(error.error.error,"Error");
     })
   }
   deleteMyComment(commentId:any,postId:any){
     let userObj = JSON.parse(localStorage.getItem('user') || '{}');
     console.log(commentId,postId);
     this.instaService.deleteComment(commentId,postId,userObj.user._id,userObj.token).subscribe((res:any)=>{
-      alert(res.message);
       this.ngOnInit();
     },(error)=>{
-      alert(error.error.error);
+      this.toastr.error(error.error.error,"Error");
     })
   }
   navigateToUserProfile(post:any){

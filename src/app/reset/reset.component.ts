@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { InstaService } from '../insta.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { InstaService } from '../insta.service';
 })
 export class ResetComponent implements OnInit {
 
-  constructor(private instaService:InstaService, private fb:FormBuilder, private router:Router) { }
+  constructor(private instaService:InstaService, private fb:FormBuilder, private router:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -25,10 +26,10 @@ export class ResetComponent implements OnInit {
     this.instaService.resetPassword(email.email,this.resetForm.value).subscribe((res:any)=>{
       console.log(res);
       this.resetForm.reset();
-      alert(res.message);
+      this.toastr.success(res.message,"Password reset");
       this.router.navigate(['']);
     },(error)=>{
-      alert(error.error.error);
+      this.toastr.error(error.error.error,"Error");
     })
   }
 

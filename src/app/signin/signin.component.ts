@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { InstaService } from '../insta.service';
 
@@ -11,7 +12,7 @@ import { InstaService } from '../insta.service';
 })
 export class SigninComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private router:Router, private instaService: InstaService) { }
+  constructor(private fb: FormBuilder, private router:Router, private instaService: InstaService, private toastr:ToastrService) { }
 
   ngOnInit(): void {
 
@@ -27,10 +28,10 @@ export class SigninComponent implements OnInit {
     this.instaService.signinUser(this.signinForm.value).subscribe((res)=>{
       localStorage.setItem("user",JSON.stringify(res));
       this.signinForm.reset();
-      alert('Signin success!')
+      this.toastr.success("Welcome back :)", "Signed in successfully");
       this.router.navigate(['home']);
     },(error)=>{
-      alert(error.error.error);
+      this.toastr.error(error.error.error,"Error");
     })
   }
   navigateToSignup(){

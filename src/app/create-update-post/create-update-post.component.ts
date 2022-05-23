@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { InstaService } from '../insta.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { InstaService } from '../insta.service';
 export class CreateUpdatePostComponent implements OnInit {
   photo: any;
   postId: any;
-  constructor(private fb: FormBuilder, private instaService: InstaService, private router: Router,private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private instaService: InstaService, private router: Router,private route: ActivatedRoute,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     let userObj = JSON.parse(localStorage.getItem('user') || '{}');
@@ -59,22 +60,21 @@ export class CreateUpdatePostComponent implements OnInit {
     if(this.postId){
       //update
       this.instaService.updatePost(userObj.user._id,this.postId,userObj.token,formData).subscribe((res:any)=>{
-        alert(res.message);
         this.router.navigate(['home']).then(() => {
           window.location.reload();
         });
       },(error)=>{
-        alert(error.error.error);
+        this.toastr.error(error.error.error,"Error");
       })
     }
     else{
       //create
       this.instaService.createPost(userObj.user._id, userObj.token, formData).subscribe((res: any) => {
         this.createPostForm.reset();
-        alert(res.message);
+        this.toastr.success(res.message,"POST");
         this.navigateToHome();
       }, (error) => {
-         alert(error.error.error);
+        this.toastr.error(error.error.error,"Error");
       })
     }
 

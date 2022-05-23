@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { InstaService } from '../insta.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { InstaService } from '../insta.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router, private instaService:InstaService) { }
+  constructor(private router:Router, private instaService:InstaService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -23,7 +24,7 @@ export class HeaderComponent implements OnInit {
   signoutUser(){
     localStorage.removeItem("user");
     this.instaService.signout().subscribe((res:any)=>{
-      alert(res.message);
+      this.toastr.success("See you soon :)", "Signed out successfully");
       this.router.navigate(['']);
     },(error)=>{
       alert(error.error.error);

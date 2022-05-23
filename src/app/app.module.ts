@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import { ToastrModule } from 'ngx-toastr';
 
 import { HomeComponent } from './home/home.component';
 import { ForgotComponent } from './forgot/forgot.component';
@@ -44,7 +45,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     MatToolbarModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    ToastrModule.forRoot({
+      timeOut: 1500,
+      progressBar: true,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

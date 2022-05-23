@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { InstaService } from '../insta.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { InstaService } from '../insta.service';
 })
 export class ForgotComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private instaService:InstaService, private router: Router) { }
+  constructor(private fb: FormBuilder, private instaService:InstaService, private router: Router, private toastr:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -29,9 +30,9 @@ export class ForgotComponent implements OnInit {
       console.log(res);
       this.forgotForm.reset();
       this.router.navigate(['reset']);
-      alert(res.message);
+      this.toastr.success(res.message,"Reset email");
     },(error)=>{
-      alert(error.error.error);
+      this.toastr.error(error.error.error,"Error");
     })
   }
 }
