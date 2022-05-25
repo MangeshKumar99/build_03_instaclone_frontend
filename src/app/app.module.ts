@@ -13,6 +13,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import { ToastrModule } from 'ngx-toastr';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { HomeComponent } from './home/home.component';
 import { ForgotComponent } from './forgot/forgot.component';
@@ -46,6 +47,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
+    MatAutocompleteModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       progressBar: true,

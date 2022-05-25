@@ -66,4 +66,8 @@ export class InstaService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
     return this.http.get(`${this.COMMON_URL}check/${userId}`,{headers: headers});
   }
+  searchUsersByName(userId:any,token:any,userName:any){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('content-type','application/json');
+    return this.http.get(`${this.COMMON_URL}/user/search/${userId}/${userName}`,{headers: headers});
+  }
 }
