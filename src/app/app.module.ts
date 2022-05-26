@@ -14,6 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import { ToastrModule } from 'ngx-toastr';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { HomeComponent } from './home/home.component';
 import { ForgotComponent } from './forgot/forgot.component';
@@ -48,6 +49,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatIconModule,
     MatMenuModule,
     MatAutocompleteModule,
+    MatProgressSpinnerModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       progressBar: true,

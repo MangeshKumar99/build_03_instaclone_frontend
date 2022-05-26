@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
   deleteMyPost(postId:any){
     let userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.deletePost(postId,userObj.user._id,userObj.token).subscribe((res:any)=>{
-      alert(res.message);
+      this.toastr.success(res.message,"POST");
       this.ngOnInit();
     },(error)=>{
       alert(error.error.error);
