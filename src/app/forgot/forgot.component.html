@@ -6,7 +6,7 @@
             </div>
             <form [formGroup]="forgotForm" (ngSubmit)="onSubmit()">
                 <div class="form-group mb-2">
-                    <input type="password" class="form-control" formControlName="email" placeholder="Email" autocomplete="off" required>
+                    <input type="text" class="form-control" formControlName="email" placeholder="Email" autocomplete="off" required>
                     <div *ngIf="forgotForm.get('email')?.errors?.required && forgotFormControl.email.touched">
                         <small style="color: red;">email is required</small>
                     </div>
