@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  COMMON_URL:'http://localhost:1313/api/'
+  COMMON_URL:'https://instaclone-backend-build03.herokuapp.com/api/'
 };
 
 /*
