@@ -81,7 +81,6 @@ export class UserProfileComponent implements OnInit {
   updateFollow(){
     let userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.updateFollow(userObj.user._id,this.userProfileDetails._id,userObj.token).subscribe((res)=>{
-      console.log(res);
       this.ngOnInit();
     },(error)=>{
       console.log(error);

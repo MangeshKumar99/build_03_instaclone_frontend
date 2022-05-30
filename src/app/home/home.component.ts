@@ -89,7 +89,6 @@ export class HomeComponent implements OnInit {
   }
   deleteMyComment(commentId:any,postId:any){
     let userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    console.log(commentId,postId);
     this.instaService.deleteComment(commentId,postId,userObj.user._id,userObj.token).subscribe((res:any)=>{
       this.ngOnInit();
     },(error)=>{
