@@ -20,8 +20,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPosts();
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    let isEmpty = Object.keys(userObj).length === 0;
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const isEmpty = Object.keys(userObj).length === 0;
     if(!isEmpty){
       this.loggedInUser = userObj.user.email;
       this.loggedInUserName = userObj.user.name;
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
       this.toastr.info("Comment is empty","Info");
     }
     else{
-      let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+      const userObj = JSON.parse(localStorage.getItem('user') || '{}');
       this.instaService.postComment(userObj.user._id,post._id,userObj.token,this.commentForm.value).subscribe((res:any)=>{
         this.commentForm.reset();
         this.ngOnInit();
@@ -45,8 +45,8 @@ export class HomeComponent implements OnInit {
     }
   }
   loadPosts() {
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    let isEmpty = Object.keys(userObj).length === 0;
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const isEmpty = Object.keys(userObj).length === 0;
     if(isEmpty){
       this.router.navigate(['']);
     }
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/home/createupdatepost',post]);
   }
   deleteMyPost(postId:any){
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.deletePost(postId,userObj.user._id,userObj.token).subscribe((res:any)=>{
       this.toastr.success(res.message,"POST");
       this.ngOnInit();
@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
     })
   }
   updateLikes(postId:any){
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.updateLikeCount(postId,userObj.user._id,userObj.token).subscribe((res)=>{
       this.ngOnInit();
     },(error)=>{
@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
     })
   }
   deleteMyComment(commentId:any,postId:any){
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.deleteComment(commentId,postId,userObj.user._id,userObj.token).subscribe((res:any)=>{
       this.ngOnInit();
     },(error)=>{
@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
     })
   }
   navigateToUserProfile(post:any){
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(userObj.user._id==post.postedBy._id){
       this.router.navigate(['/home/myprofile']);
     }
@@ -109,8 +109,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/home/dashboard',obj]);
   }
   extractInitials(name:any){
-    let matches = name.match(/\b(\w)/g); 
-    let acronym = matches.join('');
+    const matches = name.match(/\b(\w)/g); 
+    const acronym = matches.join('');
     return acronym;
   }
 }

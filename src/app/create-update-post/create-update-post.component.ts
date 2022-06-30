@@ -16,9 +16,9 @@ export class CreateUpdatePostComponent implements OnInit {
   constructor(private fb: FormBuilder, private instaService: InstaService, private router: Router,private route: ActivatedRoute,private toastr:ToastrService) { }
 
   ngOnInit(): void {
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     
-    let isEmpty = Object.keys(userObj).length === 0;
+    const isEmpty = Object.keys(userObj).length === 0;
     //Restricting the user from accessing this screen if he/she has not been authorized
     //Thus navigating the user back to signin page
     if(isEmpty){
@@ -52,11 +52,11 @@ export class CreateUpdatePostComponent implements OnInit {
     return this.createPostForm.controls;
   }
   onSubmit() {
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append("title", this.createPostForm.value.title);
     formData.append("description", this.createPostForm.value.description);
     formData.append("photo", this.photo);
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(this.postId){
       //update
       this.instaService.updatePost(userObj.user._id,this.postId,userObj.token,formData).subscribe((res:any)=>{

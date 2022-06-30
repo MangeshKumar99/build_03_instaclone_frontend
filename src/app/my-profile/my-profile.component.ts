@@ -15,8 +15,8 @@ export class MyProfileComponent implements OnInit {
   constructor(private instaService:InstaService, private router:Router) { }
 
   ngOnInit(): void {
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    let isEmpty = Object.keys(userObj).length === 0;
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const isEmpty = Object.keys(userObj).length === 0;
     if(isEmpty){
       this.router.navigate(['']);
     }
@@ -39,10 +39,10 @@ export class MyProfileComponent implements OnInit {
     }
   }
   getPosts(){
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.getAllPosts(userObj.user._id,userObj.token).subscribe(
       (res: any) => {
-        let userPosts = res.result;
+        const userPosts = res.result;
         this.filterUsersPosts(userPosts);
       },
       (error) => {
@@ -51,7 +51,7 @@ export class MyProfileComponent implements OnInit {
     );
   }
   filterUsersPosts(userPosts:any){
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     for(let i=0;i<userPosts.length;i++){
       if(userPosts[i].postedBy._id==userObj.user._id){
         this.filteredUsersPostsArray.push(userPosts[i]);
@@ -63,8 +63,8 @@ export class MyProfileComponent implements OnInit {
   }
   extractInitials(name:any){
     if(name){
-      let matches = name.match(/\b(\w)/g); 
-      let acronym = matches.join('');
+      const matches = name.match(/\b(\w)/g); 
+      const acronym = matches.join('');
       return acronym;
     }
   }

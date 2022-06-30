@@ -18,8 +18,8 @@ export class UserProfileComponent implements OnInit {
   constructor(private instaService: InstaService, private route: ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    let isEmpty = Object.keys(userObj).length === 0;
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const isEmpty = Object.keys(userObj).length === 0;
     if(isEmpty){
       this.router.navigate(['']);
     }
@@ -35,7 +35,7 @@ export class UserProfileComponent implements OnInit {
         })
         //logged in user details
         setTimeout(()=>{
-          let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+          const userObj = JSON.parse(localStorage.getItem('user') || '{}');
           this.instaService.getUser(userObj.user._id).subscribe((res:any)=>{
             if(res.following.includes(this.userProfileDetails?.email)){
               this.flag=true;
@@ -59,7 +59,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
   loadPosts(){
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.getAllPosts(userObj.user._id,userObj.token).subscribe(
       (res: any) => {
         this.postsArray = res.result;
@@ -79,7 +79,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
   updateFollow(){
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.updateFollow(userObj.user._id,this.userProfileDetails._id,userObj.token).subscribe((res)=>{
       this.ngOnInit();
     },(error)=>{
@@ -91,8 +91,8 @@ export class UserProfileComponent implements OnInit {
   }
   extractInitials(name:any){
     if(name){
-      let matches = name.match(/\b(\w)/g); 
-      let acronym = matches.join('');
+      const matches = name.match(/\b(\w)/g); 
+      const acronym = matches.join('');
       return acronym;
     }
   }

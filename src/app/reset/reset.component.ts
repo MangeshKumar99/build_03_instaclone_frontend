@@ -22,7 +22,7 @@ export class ResetComponent implements OnInit {
     return this.resetForm.controls;
   }
   onSubmit() {
-    let email = JSON.parse(localStorage.getItem('email') || '{}');
+    const email = JSON.parse(localStorage.getItem('email') || '{}');
     this.instaService.resetPassword(email.email,this.resetForm.value).subscribe((res:any)=>{
       console.log(res);
       this.resetForm.reset();

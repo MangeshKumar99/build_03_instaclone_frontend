@@ -16,8 +16,8 @@ export class DashboardComponent implements OnInit {
   constructor(private route:ActivatedRoute,private instaService: InstaService, private router:Router) { }
 
   ngOnInit(): void {
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    let isEmpty = Object.keys(userObj).length === 0;
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const isEmpty = Object.keys(userObj).length === 0;
     if(isEmpty){
       this.router.navigate(['']);
     }

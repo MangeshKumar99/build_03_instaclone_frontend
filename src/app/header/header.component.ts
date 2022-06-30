@@ -33,8 +33,8 @@ export class HeaderComponent implements OnInit {
     })
   }
   handleChange(event:any){
-    let searchText = event.target.value;
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const searchText = event.target.value;
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(searchText.length >=2 && searchText.length <=5){
       this.instaService.searchUsersByName(userObj.user._id,userObj.token,searchText).pipe(debounceTime(500)).subscribe((res:any)=>{
         this.filteredOptions=res;
@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
     }
   }
   navigateToProfile(user:any){
-    let userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(userObj.user._id==user._id){
       this.router.navigate(['/home/myprofile']);
     }
