@@ -16,7 +16,7 @@
                         <button (click)="deleteMyPost(post._id)" mat-menu-item>Delete Post</button>
                     </mat-menu>
                 </div>
-                <img class="img-fluid pt-1 userpost" src="http://localhost:1313/api/post/photo/{{post._id}}" />
+                <img class="img-fluid pt-1 userpost" src="{{post.photo}}" />
                 <mat-icon style="cursor: pointer;" *ngIf="post.likes.includes(loggedInUser)" (click)="updateLikes(post._id)" class="pt-1 red-icon">favorite_border</mat-icon>
                 <mat-icon style="cursor: pointer;" *ngIf="!post.likes.includes(loggedInUser)" (click)="updateLikes(post._id)" class="pt-1">favorite_border</mat-icon>
                 <div style="cursor:pointer;" (click)="navigateToDashboard(post.likes)">{{post.likes.length}}&nbsp;likes</div>
@@ -36,7 +36,7 @@
                             {{comment.comment}}
                         </span>
                         <span style="flex:1 1 auto;"></span>
-                        <mat-icon *ngIf="comment.commentedBy==loggedInUserName"style="cursor: pointer;" (click)="deleteMyComment(comment._id,post._id)">delete</mat-icon>
+                        <mat-icon *ngIf="comment.commentedBy==loggedInUserName" style="cursor: pointer;" (click)="deleteMyComment(comment._id,post._id)">delete</mat-icon>
                     </div>
                 </div>
                 <form [formGroup]="commentForm" (ngSubmit)="onSubmit(post)">

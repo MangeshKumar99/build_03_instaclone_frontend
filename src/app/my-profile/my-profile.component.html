@@ -25,7 +25,7 @@
             <div style="font-weight: 500;" class="pt-1">{{myProfileDetails?.name}}</div>
             <div class="d-flex flex-wrap pt-1">
                 <div *ngFor="let post of filteredUsersPostsArray">
-                    <img class="img-fluid user-post" src="http://localhost:1313/api/post/photo/{{post._id}}"/>
+                    <img class="img-fluid user-post" src="{{post.photo}}"/>
                 </div> 
             </div>
         </div>

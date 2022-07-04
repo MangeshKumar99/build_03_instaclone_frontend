@@ -57,6 +57,7 @@ export class MyProfileComponent implements OnInit {
         this.filteredUsersPostsArray.push(userPosts[i]);
       }
     }
+    console.log(this.filteredUsersPostsArray);
   }
   navigateToDashboard(data:any){
     this.router.navigate(['/home/dashboard',data]);
