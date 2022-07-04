@@ -19,7 +19,8 @@
                 <img class="img-fluid pt-1 userpost" src="{{post.photo}}" />
                 <mat-icon style="cursor: pointer;" *ngIf="post.likes.includes(loggedInUser)" (click)="updateLikes(post._id)" class="pt-1 red-icon">favorite_border</mat-icon>
                 <mat-icon style="cursor: pointer;" *ngIf="!post.likes.includes(loggedInUser)" (click)="updateLikes(post._id)" class="pt-1">favorite_border</mat-icon>
-                <div style="cursor:pointer;" (click)="navigateToDashboard(post.likes)">{{post.likes.length}}&nbsp;likes</div>
+                <div *ngIf="post.likes.length==1" style="cursor:pointer;" (click)="navigateToDashboard(post.likes)">{{post.likes.length}}&nbsp;like</div>
+                <div  *ngIf="post.likes.length>1"  style="cursor:pointer;" (click)="navigateToDashboard(post.likes)">{{post.likes.length}}&nbsp;likes</div>
                 <div class="d-inline align-items-center gap-2">
                     <div class="d-flex align-items-center gap-2 pt-1">
                         <div class="username">{{post.postedBy.name}}</div>
