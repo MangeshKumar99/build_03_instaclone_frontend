@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { InstaService } from '../insta.service';
+import { InstaService } from 'src/app/insta.service';
 
 
 @Component({
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
   }
   
   navigateToCreateUpdatePost(post:any){
-    this.router.navigate(['/home/createupdatepost',post]);
+    this.router.navigate(['home/user/createupdatepost',post]);
   }
   deleteMyPost(postId:any){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
@@ -98,15 +98,15 @@ export class HomeComponent implements OnInit {
   navigateToUserProfile(post:any){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(userObj.user._id==post.postedBy._id){
-      this.router.navigate(['/home/myprofile']);
+      this.router.navigate(['home/user/myprofile']);
     }
     else{
-      this.router.navigate(['/home/userprofile',{_id:post.postedBy._id}]);
+      this.router.navigate(['home/user/userprofile',{_id:post.postedBy._id}]);
     }
   }
   navigateToDashboard(data:any){
     const obj={likes:data};
-    this.router.navigate(['/home/dashboard',obj]);
+    this.router.navigate(['home/user/dashboard',obj]);
   }
   extractInitials(name:any){
     const matches = name.match(/\b(\w)/g); 

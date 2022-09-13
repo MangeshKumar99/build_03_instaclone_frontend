@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { InstaService } from '../insta.service';
+import { InstaService } from 'src/app/insta.service';
+
 
 @Component({
   selector: 'app-signup',

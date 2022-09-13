@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { InstaService } from '../insta.service';
+import { InstaService } from 'src/app/insta.service';
+
 
 @Component({
   selector: 'app-dashboard',

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { InstaService } from '../insta.service';
+import { InstaService } from 'src/app/insta.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -87,7 +87,7 @@ export class UserProfileComponent implements OnInit {
     })
   }
   navigateToDashboard(data:any){
-    this.router.navigate(['/home/dashboard',data]);
+    this.router.navigate(['home/user/dashboard',data]);
   }
   extractInitials(name:any){
     if(name){

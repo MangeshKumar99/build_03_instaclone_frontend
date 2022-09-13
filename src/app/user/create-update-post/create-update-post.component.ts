@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { InstaService } from '../insta.service';
+import { InstaService } from 'src/app/insta.service';
+
 
 @Component({
   selector: 'app-create-update-post',
@@ -13,7 +14,7 @@ import { InstaService } from '../insta.service';
 export class CreateUpdatePostComponent implements OnInit {
   photo: any;
   postId: any;
-  constructor(private fb: FormBuilder, private instaService: InstaService, private router: Router,private route: ActivatedRoute,private toastr:ToastrService) { }
+  constructor(private fb: FormBuilder, private instaService: InstaService , private router: Router,private route: ActivatedRoute,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');

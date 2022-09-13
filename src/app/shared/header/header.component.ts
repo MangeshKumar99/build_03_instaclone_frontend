@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { InstaService } from '../insta.service';
 import { ToastrService } from 'ngx-toastr';
 import {debounceTime} from 'rxjs/operators'
+import { InstaService } from 'src/app/insta.service';
 
 @Component({
   selector: 'app-header',
@@ -18,10 +18,10 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToCreateUpdatePost(){
-    this.router.navigate(['/home/createupdatepost']);
+    this.router.navigate(['/home/user/createupdatepost']);
   }
   navigateToMyprofile(){
-    this.router.navigate(['/home/myprofile']);
+    this.router.navigate(['/home/user/myprofile']);
   }
   signoutUser(){
     localStorage.removeItem("user");
@@ -46,10 +46,10 @@ export class HeaderComponent implements OnInit {
   navigateToProfile(user:any){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(userObj.user._id==user._id){
-      this.router.navigate(['/home/myprofile']);
+      this.router.navigate(['/home/user/myprofile']);
     }
     else{
-      this.router.navigate(['/home/userprofile',{_id:user._id}]);
+      this.router.navigate(['/home/user/userprofile',{_id:user._id}]);
     }
   }
 
