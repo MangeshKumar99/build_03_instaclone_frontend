@@ -25,7 +25,4 @@ import { SharedModule } from './shared/shared.module';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(){
-    console.log("app module...");
-  }
- }
+}
