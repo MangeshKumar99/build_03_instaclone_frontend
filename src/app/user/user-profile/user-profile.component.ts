@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
       this.router.navigate(['']);
     }
     if(!isEmpty){
-      this.instaService.checkUser(userObj.user._id,userObj.token).subscribe((res)=>{
+      this.instaService.checkUser(userObj.user._id).subscribe((res)=>{
         this.route.params.subscribe((params: Params) => {
           this.userId=params._id;
         })
@@ -60,7 +60,7 @@ export class UserProfileComponent implements OnInit {
   }
   loadPosts(){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    this.instaService.getAllPosts(userObj.user._id,userObj.token).subscribe(
+    this.instaService.getAllPosts(userObj.user._id).subscribe(
       (res: any) => {
         this.postsArray = res.result;
         this.filterPostsArray();
@@ -80,7 +80,7 @@ export class UserProfileComponent implements OnInit {
   }
   updateFollow(){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    this.instaService.updateFollow(userObj.user._id,this.userProfileDetails._id,userObj.token).subscribe((res)=>{
+    this.instaService.updateFollow(userObj.user._id,this.userProfileDetails._id).subscribe((res)=>{
       this.ngOnInit();
     },(error)=>{
       console.log(error);

@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['']);
     }
     if(!isEmpty){
-      this.instaService.checkUser(userObj.user._id,userObj.token).subscribe((res)=>{
+      this.instaService.checkUser(userObj.user._id).subscribe((res)=>{
         this.route.params.subscribe((params: Params) => {
           if(params.likes){
             this.dashboardHeading='Likes';

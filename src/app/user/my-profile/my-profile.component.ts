@@ -22,7 +22,7 @@ export class MyProfileComponent implements OnInit {
       this.router.navigate(['']);
     }
     if(!isEmpty){
-      this.instaService.checkUser(userObj.user._id,userObj.token).subscribe((res)=>{
+      this.instaService.checkUser(userObj.user._id).subscribe((res)=>{
         this.instaService.getUser(userObj.user._id).subscribe((res:any)=>{
           this.myProfileDetails=res;
           this.getPosts();
@@ -41,7 +41,7 @@ export class MyProfileComponent implements OnInit {
   }
   getPosts(){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    this.instaService.getAllPosts(userObj.user._id,userObj.token).subscribe(
+    this.instaService.getAllPosts(userObj.user._id).subscribe(
       (res: any) => {
         const userPosts = res.result;
         this.filterUsersPosts(userPosts);

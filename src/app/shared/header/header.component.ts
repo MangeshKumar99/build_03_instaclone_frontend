@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
     const searchText = event.target.value;
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(searchText.length >=2 && searchText.length <=5){
-      this.instaService.searchUsersByName(userObj.user._id,userObj.token,searchText).pipe(debounceTime(500)).subscribe((res:any)=>{
+      this.instaService.searchUsersByName(userObj.user._id,searchText).pipe(debounceTime(500)).subscribe((res:any)=>{
         this.filteredOptions=res;
       },(error)=>{
         this.toastr.error(error.error.error,"Error");

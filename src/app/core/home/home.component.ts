@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
     }
     else{
       const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-      this.instaService.postComment(userObj.user._id,post._id,userObj.token,this.commentForm.value).subscribe((res:any)=>{
+      this.instaService.postComment(userObj.user._id,post._id,this.commentForm.value).subscribe((res:any)=>{
         this.commentForm.reset();
         this.ngOnInit();
       },(error)=>{
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['']);
     }
     if(!isEmpty){
-      this.instaService.getAllPosts(userObj.user._id,userObj.token).subscribe(
+      this.instaService.getAllPosts(userObj.user._id).subscribe(
         (res: any) => {
           this.postsArray = res.result;
         },
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
   }
   deleteMyPost(postId:any){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    this.instaService.deletePost(postId,userObj.user._id,userObj.token).subscribe((res:any)=>{
+    this.instaService.deletePost(postId,userObj.user._id).subscribe((res:any)=>{
       this.toastr.success(res.message,"POST");
       this.ngOnInit();
     },(error)=>{
@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
   }
   updateLikes(postId:any){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    this.instaService.updateLikeCount(postId,userObj.user._id,userObj.token).subscribe((res)=>{
+    this.instaService.updateLikeCount(postId,userObj.user._id).subscribe((res)=>{
       this.ngOnInit();
     },(error)=>{
       this.toastr.error(error.error.error,"Error");
@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
   }
   deleteMyComment(commentId:any,postId:any){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    this.instaService.deleteComment(commentId,postId,userObj.user._id,userObj.token).subscribe((res:any)=>{
+    this.instaService.deleteComment(commentId,postId,userObj.user._id).subscribe((res:any)=>{
       this.ngOnInit();
     },(error)=>{
       this.toastr.error(error.error.error,"Error");

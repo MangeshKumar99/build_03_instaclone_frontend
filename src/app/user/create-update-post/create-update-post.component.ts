@@ -26,7 +26,7 @@ export class CreateUpdatePostComponent implements OnInit {
       this.router.navigate(['']);
     }
     if(!isEmpty){
-      this.instaService.checkUser(userObj.user._id,userObj.token).subscribe((res)=>{
+      this.instaService.checkUser(userObj.user._id).subscribe((res)=>{
         this.route.params.subscribe((params: Params) => {
           this.postId=params._id
           this.createPostForm.patchValue({
@@ -60,7 +60,7 @@ export class CreateUpdatePostComponent implements OnInit {
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(this.postId){
       //update
-      this.instaService.updatePost(userObj.user._id,this.postId,userObj.token,formData).subscribe((res:any)=>{
+      this.instaService.updatePost(userObj.user._id,this.postId,formData).subscribe((res:any)=>{
         this.router.navigate(['home']).then(() => {
           window.location.reload();
         });
@@ -70,7 +70,7 @@ export class CreateUpdatePostComponent implements OnInit {
     }
     else{
       //create
-      this.instaService.createPost(userObj.user._id, userObj.token, formData).subscribe((res: any) => {
+      this.instaService.createPost(userObj.user._id,formData).subscribe((res: any) => {
         this.createPostForm.reset();
         this.toastr.success(res.message,"POST");
         this.navigateToHome();
