@@ -11,7 +11,7 @@ import { InstaService } from 'src/app/insta.service';
 })
 export class MyProfileComponent implements OnInit {
   myProfileDetails: any;
-  filteredUsersPostsArray:any =[];
+  filteredUsersPostsArray:any = [];
 
   constructor(private instaService:InstaService, private router:Router) { }
 

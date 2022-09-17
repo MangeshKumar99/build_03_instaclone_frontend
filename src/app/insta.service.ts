@@ -1,5 +1,6 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,55 +10,55 @@ export class InstaService {
   COMMON_URL= environment.COMMON_URL;
   constructor(private http:HttpClient) { }
 
-  signinUser(payload:any){
+  signinUser(payload:object):Observable<any>{
     return this.http.post(`${this.COMMON_URL}signin`,payload);
   }
-  signupUser(payload:any){
+  signupUser(payload:object):Observable<any>{
     return this.http.post(`${this.COMMON_URL}signup`,payload);
   }
-  sendResetLink(payload:any){
+  sendResetLink(payload:object):Observable<any>{
     return this.http.post(`${this.COMMON_URL}forgotpassword`,payload);
   }
-  resetPassword(email:any,payload:any){
+  resetPassword(email:string,payload:object):Observable<any>{
     return this.http.post(`${this.COMMON_URL}resetpassword/${email}`,payload);
   }
-  getAllPosts(userId:any){
+  getAllPosts(userId:string):Observable<any>{
     return this.http.get(`${this.COMMON_URL}posts/${userId}`);
   }
-  createPost(userId:any,payload:any){
+  createPost(userId:string,payload:Object):Observable<any>{
     return this.http.post(`${this.COMMON_URL}post/create/${userId}`,payload);
   }
-  signout(){
+  signout():Observable<any>{
     return this.http.get(`${this.COMMON_URL}signout`);
   }
-  updateLikeCount(postId:any,userId:any){
+  updateLikeCount(postId:string,userId:string):Observable<any>{
     return this.http.get(`${this.COMMON_URL}post/like/${postId}/${userId}`);
   }
-  deletePost(postId:any,userId:any){
+  deletePost(postId:string,userId:string):Observable<any>{
     return this.http.delete(`${this.COMMON_URL}post/${postId}/${userId}`)
   }
-  updatePost(userId:any,postId:any,payload:any){
+  updatePost(userId:string,postId:string,payload:object):Observable<any>{
     return this.http.put(`${this.COMMON_URL}post/${postId}/${userId}`,payload);
   }
-  postComment(userId:any,postId:any,payload:any){
+  postComment(userId:string,postId:string,payload:object):Observable<any>{
     return this.http.post(`${this.COMMON_URL}comment/create/${postId}/${userId}`,payload);
   }
-  deleteComment(commentId:any,postId:any,userId:any){
+  deleteComment(commentId:string,postId:string,userId:string):Observable<any>{
     return this.http.get(`${this.COMMON_URL}comment/delete/${commentId}/${postId}/${userId}`);
   }
-  getUser(loggedInUser:any){
+  getUser(loggedInUser:string):Observable<any>{
     return this.http.get(`${this.COMMON_URL}user/${loggedInUser}`);
   }
-  updateFollow(userId1:any,userId2:any){
+  updateFollow(userId1:string,userId2:string):Observable<any>{
     return this.http.get(`${this.COMMON_URL}user/update/follow/${userId1}/${userId2}`);
   }
   loggedIn(){
     return !!localStorage.getItem('user');
   }
-  checkUser(userId:any){
+  checkUser(userId:string):Observable<any>{
     return this.http.get(`${this.COMMON_URL}check/${userId}`);
   }
-  searchUsersByName(userId:any,userName:any){
+  searchUsersByName(userId:string,userName:string):Observable<any>{
     return this.http.get(`${this.COMMON_URL}/user/search/${userId}/${userName}`);
   }
 }

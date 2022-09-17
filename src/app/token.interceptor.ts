@@ -6,7 +6,6 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { InstaService } from './insta.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

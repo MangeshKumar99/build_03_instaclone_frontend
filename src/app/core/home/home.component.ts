@@ -13,8 +13,8 @@ import { InstaService } from 'src/app/insta.service';
 })
 export class HomeComponent implements OnInit {
   postsArray: any = [];
-  loggedInUser: any;
-  loggedInUserName: any;
+  loggedInUser!: string;
+  loggedInUserName!: string;
 
   constructor(private instaService: InstaService, private router: Router, private fb: FormBuilder, private toastr:ToastrService) {}
 
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
   navigateToCreateUpdatePost(post:any){
     this.router.navigate(['home/user/createupdatepost',post]);
   }
-  deleteMyPost(postId:any){
+  deleteMyPost(postId:string){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.deletePost(postId,userObj.user._id).subscribe((res:any)=>{
       this.toastr.success(res.message,"POST");
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
       alert(error.error.error);
     })
   }
-  updateLikes(postId:any){
+  updateLikes(postId:string){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.updateLikeCount(postId,userObj.user._id).subscribe((res)=>{
       this.ngOnInit();
@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
       this.toastr.error(error.error.error,"Error");
     })
   }
-  deleteMyComment(commentId:any,postId:any){
+  deleteMyComment(commentId:string,postId:string){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.deleteComment(commentId,postId,userObj.user._id).subscribe((res:any)=>{
       this.ngOnInit();
