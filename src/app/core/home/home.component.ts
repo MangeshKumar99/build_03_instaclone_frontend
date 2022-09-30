@@ -113,4 +113,10 @@ export class HomeComponent implements OnInit {
     const acronym = matches.join('');
     return acronym;
   }
+  load(){
+    this.loadPosts();
+  }
+  postTrackBy(index:number,post:any){
+    return post._id;
+  }
 }
