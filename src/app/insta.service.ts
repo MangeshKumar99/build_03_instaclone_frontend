@@ -25,7 +25,7 @@ export class InstaService {
   getAllPosts(userId:string):Observable<any>{
     return this.http.get(`${this.COMMON_URL}posts/${userId}`);
   }
-  createPost(userId:string,payload:Object):Observable<any>{
+  createPost(userId:string,payload:object):Observable<any>{
     return this.http.post(`${this.COMMON_URL}post/create/${userId}`,payload);
   }
   signout():Observable<any>{
