@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { InstaService } from 'src/app/insta.service';
 
 
@@ -14,7 +15,7 @@ export class DashboardComponent implements OnInit {
   dashboardHeading: any;
  
 
-  constructor(private route:ActivatedRoute,private instaService: InstaService, private router:Router) { }
+  constructor(private route:ActivatedRoute,private instaService: InstaService, private router:Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
@@ -45,7 +46,11 @@ export class DashboardComponent implements OnInit {
         if(error instanceof HttpErrorResponse){
           if(error.status==401){
             this.router.navigate(['']);
-            console.log(error);
+            this.toastr.error(error.statusText);
+          }
+          else{
+            this.router.navigate(['']);
+            this.toastr.error(error.error.error);
           }
         }
       })

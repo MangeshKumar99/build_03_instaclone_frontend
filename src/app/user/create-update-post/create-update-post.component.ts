@@ -38,7 +38,11 @@ export class CreateUpdatePostComponent implements OnInit {
         if(error instanceof HttpErrorResponse){
           if(error.status==401){
             this.router.navigate(['']);
-            console.log(error);
+            this.toastr.error(error.statusText);
+          }
+          else{
+            this.router.navigate(['']);
+            this.toastr.error(error.error.error);
           }
         }
       })

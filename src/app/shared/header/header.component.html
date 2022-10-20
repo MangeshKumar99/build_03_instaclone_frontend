@@ -1,14 +1,16 @@
 <mat-toolbar class="insta-navbar">
     <img class="img-fluid" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"/>
     <span class="example-spacer"></span>
-    <div class="search-container">
-        <input  (input)="handleChange($event)" class="search-box" type="text" placeholder="Search user" [matAutocomplete]="auto"/>
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option  (click)="navigateToProfile(username)" *ngFor="let username of filteredOptions" [value]="username.name">
-              {{username.name}}
-            </mat-option>
-        </mat-autocomplete>
-    </div>
+    <form>
+        <div>
+            <input [matAutocomplete]="auto" (input)="handleChange($event)" placeholder="Search user..." type="text" class="form-control">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option  (click)="navigateToProfile(username)" *ngFor="let username of filteredOptions" [value]="username.name">
+                  {{username.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </div>
+    </form>
     <span class="example-spacer"></span>
     <mat-icon style="cursor:pointer" [matMenuTriggerFor]="menu">account_circle</mat-icon>
     <mat-menu #menu="matMenu">

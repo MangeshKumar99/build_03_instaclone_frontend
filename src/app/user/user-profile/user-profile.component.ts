@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { InstaService } from 'src/app/insta.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class UserProfileComponent implements OnInit {
   userProfileDetails: any;
   flag:any
 
-  constructor(private instaService: InstaService, private route: ActivatedRoute, private router:Router) { }
+  constructor(private instaService: InstaService, private route: ActivatedRoute, private router:Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
@@ -52,7 +53,11 @@ export class UserProfileComponent implements OnInit {
         if(error instanceof HttpErrorResponse){
           if(error.status==401){
             this.router.navigate(['']);
-            console.log(error);
+            this.toastr.error(error.statusText);
+          }
+          else{
+            this.router.navigate(['']);
+            this.toastr.error(error.error.error);
           }
         }
       })
