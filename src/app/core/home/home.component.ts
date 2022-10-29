@@ -120,4 +120,7 @@ export class HomeComponent implements OnInit {
   postTrackBy(index:number,post:any){
     return post._id;
   }
+  commentTrackBy(index:number,comment:any){
+    return comment._id;
+  }
 }

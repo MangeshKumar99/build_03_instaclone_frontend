@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="d-inline align-items-center gap-2 pt-1">
-                    <div class="d-flex gap-2" *ngFor="let comment of post.comments.slice().reverse()">
+                    <div class="d-flex gap-2" *ngFor="let comment of post.comments.slice().reverse(); trackBy: commentTrackBy">
                         <span class="username">{{comment.commentedBy}}</span>
                         <span class="comment-content">
                             {{comment.comment}}
