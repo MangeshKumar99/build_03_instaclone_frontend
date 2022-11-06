@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { InstaService } from 'src/app/insta.service';
+import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 
 
 @Component({
@@ -12,31 +14,31 @@ import { InstaService } from 'src/app/insta.service';
 })
 export class MyProfileComponent implements OnInit {
   myProfileDetails: any;
-  filteredUsersPostsArray:any = [];
+  filteredUsersPostsArray: any = [];
 
-  constructor(private instaService:InstaService, private router:Router, private toastr:ToastrService) { }
+  constructor(private instaService: InstaService, private router: Router, private toastr: ToastrService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     const isEmpty = Object.keys(userObj).length === 0;
-    if(isEmpty){
+    if (isEmpty) {
       this.router.navigate(['']);
     }
-    if(!isEmpty){
-      this.instaService.checkUser(userObj.user._id).subscribe((res)=>{
-        this.instaService.getUser(userObj.user._id).subscribe((res:any)=>{
-          this.myProfileDetails=res;
+    if (!isEmpty) {
+      this.instaService.checkUser(userObj.user._id).subscribe((res) => {
+        this.instaService.getUser(userObj.user._id).subscribe((res: any) => {
+          this.myProfileDetails = res;
           this.getPosts();
-        },(error)=>{
+        }, (error) => {
           alert(error.error.error);
         })
-      },(error)=>{
-        if(error instanceof HttpErrorResponse){
-          if(error.status==401){
+      }, (error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status == 401) {
             this.router.navigate(['']);
             this.toastr.error(error.statusText);
           }
-          else{
+          else {
             this.router.navigate(['']);
             this.toastr.error(error.error.error);
           }
@@ -44,7 +46,7 @@ export class MyProfileComponent implements OnInit {
       })
     }
   }
-  getPosts(){
+  getPosts() {
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     this.instaService.getAllPosts(userObj.user._id).subscribe(
       (res: any) => {
@@ -56,22 +58,32 @@ export class MyProfileComponent implements OnInit {
       }
     );
   }
-  filterUsersPosts(userPosts:any){
+  filterUsersPosts(userPosts: any) {
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    for(let i=0;i<userPosts.length;i++){
-      if(userPosts[i].postedBy._id==userObj.user._id){
+    for (let i = 0; i < userPosts.length; i++) {
+      if (userPosts[i].postedBy._id == userObj.user._id) {
         this.filteredUsersPostsArray.push(userPosts[i]);
       }
     }
   }
-  navigateToDashboard(data:any){
-    this.router.navigate(['home/user/dashboard',data]);
+  navigateToDashboard(data: any) {
+    this.router.navigate(['home/user/dashboard', data]);
   }
-  extractInitials(name:any){
-    if(name){
-      const matches = name.match(/\b(\w)/g); 
+  extractInitials(name: any) {
+    if (name) {
+      const matches = name.match(/\b(\w)/g);
       const acronym = matches.join('');
       return acronym;
     }
+  }
+  openDialog(imageurl: string) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: { url: imageurl }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

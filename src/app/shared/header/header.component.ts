@@ -52,6 +52,9 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/home/user/userprofile',{_id:user._id}]);
     }
   }
+  navigateToHome(){
+    this.router.navigate(['home']);
+  }
 
 }
 

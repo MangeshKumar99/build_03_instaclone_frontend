@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { InstaService } from 'src/app/insta.service';
+import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,7 +18,7 @@ export class UserProfileComponent implements OnInit {
   userProfileDetails: any;
   flag:any
 
-  constructor(private instaService: InstaService, private route: ActivatedRoute, private router:Router,private toastr: ToastrService) { }
+  constructor(private instaService: InstaService, private route: ActivatedRoute, private router:Router,private toastr: ToastrService,public dialog: MatDialog) { }
 
   ngOnInit(): void {
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
@@ -100,5 +102,15 @@ export class UserProfileComponent implements OnInit {
       const acronym = matches.join('');
       return acronym;
     }
+  }
+   openDialog(imageurl: string) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: { url: imageurl }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
