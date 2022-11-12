@@ -81,9 +81,5 @@ export class MyProfileComponent implements OnInit {
       width: '300px',
       data: { url: imageurl }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 }

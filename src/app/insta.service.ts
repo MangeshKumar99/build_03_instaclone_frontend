@@ -10,22 +10,22 @@ export class InstaService {
   COMMON_URL= environment.COMMON_URL;
   constructor(private http:HttpClient) { }
 
-  signinUser(payload:object):Observable<any>{
+  signinUser(payload:any):Observable<any>{
     return this.http.post(`${this.COMMON_URL}signin`,payload);
   }
-  signupUser(payload:object):Observable<any>{
+  signupUser(payload:any):Observable<any>{
     return this.http.post(`${this.COMMON_URL}signup`,payload);
   }
-  sendResetLink(payload:object):Observable<any>{
+  sendResetLink(payload:any):Observable<any>{
     return this.http.post(`${this.COMMON_URL}forgotpassword`,payload);
   }
-  resetPassword(email:string,payload:object):Observable<any>{
+  resetPassword(email:string,payload:any):Observable<any>{
     return this.http.post(`${this.COMMON_URL}resetpassword/${email}`,payload);
   }
   getAllPosts(userId:string):Observable<any>{
     return this.http.get(`${this.COMMON_URL}posts/${userId}`);
   }
-  createPost(userId:string,payload:object):Observable<any>{
+  createPost(userId:string,payload:any):Observable<any>{
     return this.http.post(`${this.COMMON_URL}post/create/${userId}`,payload);
   }
   signout():Observable<any>{
@@ -37,10 +37,10 @@ export class InstaService {
   deletePost(postId:string,userId:string):Observable<any>{
     return this.http.delete(`${this.COMMON_URL}post/${postId}/${userId}`)
   }
-  updatePost(userId:string,postId:string,payload:object):Observable<any>{
+  updatePost(userId:string,postId:string,payload:any):Observable<any>{
     return this.http.put(`${this.COMMON_URL}post/${postId}/${userId}`,payload);
   }
-  postComment(userId:string,postId:string,payload:object):Observable<any>{
+  postComment(userId:string,postId:string,payload:any):Observable<any>{
     return this.http.post(`${this.COMMON_URL}comment/create/${postId}/${userId}`,payload);
   }
   deleteComment(commentId:string,postId:string,userId:string):Observable<any>{
