@@ -4,6 +4,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { InstaService } from 'src/app/insta.service';
+import { Post } from 'src/app/shared/interfaces/post';
+import { Result } from 'src/app/shared/interfaces/result';
+import { UserComment } from 'src/app/shared/interfaces/user-comment';
 
 
 @Component({
@@ -12,7 +15,7 @@ import { InstaService } from 'src/app/insta.service';
   styleUrls: ['./home.component.less'],
 })
 export class HomeComponent implements OnInit {
-  postsArray: any = [];
+  postsArray: Result[] = [];
   loggedInUser!: string;
   loggedInUserName!: string;
 
@@ -30,7 +33,7 @@ export class HomeComponent implements OnInit {
   commentForm = this.fb.group({
     comments:['',Validators.required]
   });
-  onSubmit(post:any){
+  onSubmit(post:Result){
     if(this.commentForm.value.comments==''){
       this.toastr.info("Comment is empty","Info");
     }
@@ -52,7 +55,7 @@ export class HomeComponent implements OnInit {
     }
     if(!isEmpty){
       this.instaService.getAllPosts(userObj.user._id).subscribe(
-        (res: any) => {
+        (res: Post) => {
           this.postsArray = res.result;
         },
         (error) => {
@@ -71,12 +74,12 @@ export class HomeComponent implements OnInit {
     }
   }
   
-  navigateToCreateUpdatePost(post:any){
+  navigateToCreateUpdatePost(post:Result){
     this.router.navigate(['home/user/createupdatepost',post]);
   }
   deleteMyPost(postId:string){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    this.instaService.deletePost(postId,userObj.user._id).subscribe((res:any)=>{
+    this.instaService.deletePost(postId,userObj.user._id).subscribe((res)=>{
       this.toastr.success(res.message,"POST");
       this.loadPosts();
     },(error)=>{
@@ -93,13 +96,13 @@ export class HomeComponent implements OnInit {
   }
   deleteMyComment(commentId:string,postId:string){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    this.instaService.deleteComment(commentId,postId,userObj.user._id).subscribe((res:any)=>{
+    this.instaService.deleteComment(commentId,postId,userObj.user._id).subscribe((res)=>{
       this.loadPosts();
     },(error)=>{
       this.toastr.error(error.error.error,"Error");
     })
   }
-  navigateToUserProfile(post:any){
+  navigateToUserProfile(post:Result){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(userObj.user._id==post.postedBy._id){
       this.router.navigate(['home/user/myprofile']);
@@ -112,15 +115,15 @@ export class HomeComponent implements OnInit {
     const obj={likes:data};
     this.router.navigate(['home/user/dashboard',obj]);
   }
-  extractInitials(name:any){
-    const matches = name.match(/\b(\w)/g); 
-    const acronym = matches.join('');
-    return acronym;
+  extractInitials(name:string){
+      const matches = name.match(/\b(\w)/g); 
+      const acronym = matches?.join('');
+      return acronym;
   }
-  postTrackBy(index:number,post:any){
+  postTrackBy(index:number,post:Result){
     return post._id;
   }
-  commentTrackBy(index:number,comment:any){
+  commentTrackBy(index:number,comment:UserComment){
     return comment._id;
   }
 }

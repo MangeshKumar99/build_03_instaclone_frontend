@@ -2,7 +2,7 @@
 <div class="container pt-5">
     <div class="row justify-content-center align-items-center pt-4">
         <div class="col-12 col-lg-5 col-md-10 col-sm-11">
-            <div *ngFor="let post of postsArray.slice().reverse(); trackBy: postTrackBy">
+            <div *ngFor="let post of postsArray?.slice()?.reverse(); trackBy: postTrackBy">
                 <div class="d-flex align-items-center gap-2">
                     <!-- <img class="img-fluid userlogo"
                         src="https://www.kindpng.com/picc/m/276-2764257_instagram-icon-instagram-logo-small-size-hd-png.png" /> -->
@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="spinner" *ngIf="postsArray.length==0">
+    <div class="spinner" *ngIf="postsArray?.length==0">
         <mat-spinner></mat-spinner>
     </div>
 </div>

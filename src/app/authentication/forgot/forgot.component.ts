@@ -26,7 +26,7 @@ export class ForgotComponent implements OnInit {
     this.router.navigate(['']);
   }
   onSubmit() {
-    this.instaService.sendResetLink(this.forgotForm.value).subscribe((res:any)=>{
+    this.instaService.sendResetLink(this.forgotForm.value).subscribe((res)=>{
       localStorage.setItem("email",JSON.stringify(this.forgotForm.value));
       this.forgotForm.reset();
       this.router.navigate(['reset']);

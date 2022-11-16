@@ -24,7 +24,7 @@ export class ResetComponent implements OnInit {
   }
   onSubmit() {
     const email = JSON.parse(localStorage.getItem('email') || '{}');
-    this.instaService.resetPassword(email.email,this.resetForm.value).subscribe((res:any)=>{
+    this.instaService.resetPassword(email.email,this.resetForm.value).subscribe((res)=>{
       this.resetForm.reset();
       this.toastr.success(res.message,"Password reset");
       this.router.navigate(['']);

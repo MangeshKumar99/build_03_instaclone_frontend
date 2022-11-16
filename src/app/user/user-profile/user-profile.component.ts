@@ -5,6 +5,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { InstaService } from 'src/app/insta.service';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
+import { PostedBy } from 'src/app/shared/interfaces/posted-by';
+import { Result } from 'src/app/shared/interfaces/result';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,11 +14,11 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
   styleUrls: ['./user-profile.component.less']
 })
 export class UserProfileComponent implements OnInit {
-  userId:any;
-  postsArray:any=[];
-  filteredPostsArray:any=[];
-  userProfileDetails: any;
-  flag:any
+  userId!:string;
+  postsArray:Result[] = [];
+  filteredPostsArray:Result[] = [];
+  userProfileDetails!: PostedBy;
+  flag!:boolean;
 
   constructor(private instaService: InstaService, private route: ActivatedRoute, private router:Router,private toastr: ToastrService,public dialog: MatDialog) { }
 
@@ -97,11 +99,9 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(['home/user/dashboard',data]);
   }
   extractInitials(name:any){
-    if(name){
-      const matches = name.match(/\b(\w)/g); 
-      const acronym = matches.join('');
-      return acronym;
-    }
+    const matches = name?.match(/\b(\w)/g); 
+    const acronym = matches?.join('');
+    return acronym;
   }
    openDialog(imageurl: string) {
     const dialogRef = this.dialog.open(DialogComponent, {

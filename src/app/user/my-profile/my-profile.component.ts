@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { InstaService } from 'src/app/insta.service';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
-
+import {PostedBy} from 'src/app/shared/interfaces/posted-by';
+import {Result} from 'src/app/shared/interfaces/result'
 
 @Component({
   selector: 'app-my-profile',
@@ -13,8 +14,8 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
   styleUrls: ['./my-profile.component.less']
 })
 export class MyProfileComponent implements OnInit {
-  myProfileDetails: any;
-  filteredUsersPostsArray: any = [];
+  myProfileDetails!:PostedBy;
+  filteredUsersPostsArray: Result[] = [];
 
   constructor(private instaService: InstaService, private router: Router, private toastr: ToastrService, public dialog: MatDialog) { }
 
@@ -58,7 +59,7 @@ export class MyProfileComponent implements OnInit {
       }
     );
   }
-  filterUsersPosts(userPosts: any) {
+  filterUsersPosts(userPosts: Result[]) {
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     for (let i = 0; i < userPosts.length; i++) {
       if (userPosts[i].postedBy._id == userObj.user._id) {
@@ -70,11 +71,9 @@ export class MyProfileComponent implements OnInit {
     this.router.navigate(['home/user/dashboard', data]);
   }
   extractInitials(name: any) {
-    if (name) {
-      const matches = name.match(/\b(\w)/g);
-      const acronym = matches.join('');
-      return acronym;
-    }
+    const matches = name?.match(/\b(\w)/g);
+    const acronym = matches?.join('');
+    return acronym;
   }
   openDialog(imageurl: string) {
     const dialogRef = this.dialog.open(DialogComponent, {

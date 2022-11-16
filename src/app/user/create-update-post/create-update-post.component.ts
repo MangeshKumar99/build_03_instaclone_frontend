@@ -12,8 +12,8 @@ import { InstaService } from 'src/app/insta.service';
   styleUrls: ['./create-update-post.component.less']
 })
 export class CreateUpdatePostComponent implements OnInit {
-  photo: any;
-  postId: any;
+  photo!: string;
+  postId!: string;
   constructor(private fb: FormBuilder, private instaService: InstaService , private router: Router,private route: ActivatedRoute,private toastr:ToastrService) { }
 
   ngOnInit(): void {
@@ -64,7 +64,7 @@ export class CreateUpdatePostComponent implements OnInit {
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(this.postId){
       //update
-      this.instaService.updatePost(userObj.user._id,this.postId,formData).subscribe((res:any)=>{
+      this.instaService.updatePost(userObj.user._id,this.postId,formData).subscribe((res)=>{
         this.router.navigate(['home']).then(() => {
           window.location.reload();
         });
@@ -74,7 +74,7 @@ export class CreateUpdatePostComponent implements OnInit {
     }
     else{
       //create
-      this.instaService.createPost(userObj.user._id,formData).subscribe((res: any) => {
+      this.instaService.createPost(userObj.user._id,formData).subscribe((res) => {
         this.createPostForm.reset();
         this.toastr.success(res.message,"POST");
         this.navigateToHome();

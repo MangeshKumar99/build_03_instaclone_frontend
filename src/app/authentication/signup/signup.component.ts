@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
     return this.signupForm.controls;
   }
   onSubmit() {
-    this.instaService.signupUser(this.signupForm.value).subscribe((res:any)=>{
+    this.instaService.signupUser(this.signupForm.value).subscribe((res)=>{
       this.signupForm.reset();
       this.toastr.success(res.message,"User registered");
       this.navigateToSignin();

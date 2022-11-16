@@ -11,8 +11,8 @@ import { InstaService } from 'src/app/insta.service';
   styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit {
-  dashboardArray: any;
-  dashboardHeading: any;
+  dashboardArray!: string[];
+  dashboardHeading!: string;
  
 
   constructor(private route:ActivatedRoute,private instaService: InstaService, private router:Router,private toastr: ToastrService) { }
