@@ -11,7 +11,6 @@ export class ChatService {
   constructor() {}
 
   sendMessage(message: any) {
-    console.log('sendMessage: ', message);
     this.socket.emit('chat', message);
   }
    getNewMessage(){

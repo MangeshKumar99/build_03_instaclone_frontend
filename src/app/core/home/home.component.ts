@@ -22,9 +22,6 @@ export class HomeComponent implements OnInit {
   constructor(private instaService: InstaService, private router: Router, private fb: FormBuilder, private toastr:ToastrService) {}
 
   ngOnInit(): void {
-    // this.instaService.getNewMessage().subscribe((message: string) => {
-    //   console.log(message);
-    // })
     this.loadPosts();
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     const isEmpty = Object.keys(userObj).length === 0;
