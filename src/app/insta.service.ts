@@ -1,7 +1,6 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { io } from 'socket.io-client';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,7 +8,6 @@ import { environment } from 'src/environments/environment';
 })
 export class InstaService {
   COMMON_URL= environment.COMMON_URL;
-  // socket = io("http://localhost:1313");
   constructor(private http:HttpClient) { }
 
   signinUser(payload:any):Observable<any>{

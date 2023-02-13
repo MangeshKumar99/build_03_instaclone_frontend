@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
+import { ChatComponent } from './chat/chat.component';
 import { CreateUpdatePostComponent } from './create-update-post/create-update-post.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path:'myprofile',component:MyProfileComponent,canActivate:[AuthGuard]},
   {path:'userprofile',component:UserProfileComponent,canActivate:[AuthGuard]},
   {path:'dashboard',component:DashboardComponent,canActivate:[AuthGuard]},
+  {path:'chat',component:ChatComponent,canActivate:[AuthGuard]},
 ];
 
 @NgModule({

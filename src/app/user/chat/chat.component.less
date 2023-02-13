@@ -1,0 +1,29 @@
+.chat-container{
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+    height: 80vh;
+    .chat-message-container{
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap:1.5rem;
+        .message{
+            background-color: white;
+            border-radius: 8px;
+            padding: 4px;
+            max-width: fit-content;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .enabled{
+        background-color: #3399ff;
+        cursor: pointer;
+        color: white;
+    }
+    .disabled{
+        background-color: #3399ff;
+        cursor: not-allowed;
+        color:white;
+        opacity: 0.5;   
+    }
+}

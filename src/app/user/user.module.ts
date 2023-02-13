@@ -7,6 +7,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
+import { ChatComponent } from './chat/chat.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared/shared.module';
     CreateUpdatePostComponent,
     MyProfileComponent,
     UserProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,

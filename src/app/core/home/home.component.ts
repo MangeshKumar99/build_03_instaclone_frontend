@@ -22,6 +22,9 @@ export class HomeComponent implements OnInit {
   constructor(private instaService: InstaService, private router: Router, private fb: FormBuilder, private toastr:ToastrService) {}
 
   ngOnInit(): void {
+    // this.instaService.getNewMessage().subscribe((message: string) => {
+    //   console.log(message);
+    // })
     this.loadPosts();
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     const isEmpty = Object.keys(userObj).length === 0;
@@ -34,6 +37,7 @@ export class HomeComponent implements OnInit {
     comments:['',Validators.required]
   });
   onSubmit(post:Result){
+    // this.instaService.sendMessage("hello from angular...");
     if(this.commentForm.value.comments==''){
       this.toastr.info("Comment is empty","Info");
     }

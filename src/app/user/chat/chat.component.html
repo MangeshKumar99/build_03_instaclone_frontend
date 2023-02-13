@@ -1,0 +1,23 @@
+<app-header></app-header>
+<div class="container pt-5">
+    <div class="row justify-content-center align-items-center pt-5">
+        <div class="chat-container col-12 col-lg-10 d-flex flex-column justify-content-between">
+            <div class="chat-message-container pt-4">
+                <div *ngFor="let msg of chatArray" class="message">
+                    <small class="text-warning">{{msg.name}}</small>
+                    <div>{{msg.message}}</div>
+                </div>
+            </div>
+            <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" class="form-container">
+                <div class="form-group mb-2">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" formControlName="message" placeholder="Message..."
+                            autocomplete="off">
+                        <button [ngClass]="{'enabled': messageForm.valid, 'disabled' : !messageForm.valid }"
+                            type="submit" class="input-group-text">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

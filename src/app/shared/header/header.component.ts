@@ -52,6 +52,9 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/home/user/userprofile',{_id:user._id}]);
     }
   }
+  navigateToChat(){
+    this.router.navigate(['/home/user/chat']);
+  }
   navigateToHome(){
     this.router.navigate(['home']);
   }
