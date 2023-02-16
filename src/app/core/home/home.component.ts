@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
     comments:['',Validators.required]
   });
   onSubmit(post:Result){
-    // this.instaService.sendMessage("hello from angular...");
     if(this.commentForm.value.comments==''){
       this.toastr.info("Comment is empty","Info");
     }
