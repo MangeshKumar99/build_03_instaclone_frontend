@@ -12,7 +12,8 @@
         </div>
     </form>
     <span class="example-spacer"></span>
-    <mat-icon style="cursor:pointer" [matMenuTriggerFor]="menu">account_circle</mat-icon>
+    <!-- <mat-icon style="cursor:pointer" [matMenuTriggerFor]="menu">account_circle</mat-icon> -->
+    <div style="cursor:pointer" [matMenuTriggerFor]="menu" class="profileImage">{{extractInitials()}}</div>
     <mat-menu #menu="matMenu">
         <button (click)="navigateToMyprofile()" mat-menu-item>My Profile</button>
         <button (click)="navigateToCreateUpdatePost()" mat-menu-item>Create Post</button>

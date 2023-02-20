@@ -58,7 +58,12 @@ export class HeaderComponent implements OnInit {
   navigateToHome(){
     this.router.navigate(['home']);
   }
-
+  extractInitials(){
+    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
+    const matches = userObj.user.name.match(/\b(\w)/g); 
+    const acronym = matches?.join('');
+    return acronym;
+  }
 }
 
 
