@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
     }
     else{
       const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-      this.instaService.postComment(userObj.user._id,post._id,this.commentForm.value).subscribe((res:any)=>{
+      this.instaService.postComment(userObj.user._id,post._id,this.commentForm.value).subscribe((res)=>{
         this.commentForm.reset();
         this.loadPosts();
       },(error)=>{
