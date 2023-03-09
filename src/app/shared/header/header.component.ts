@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
   }
   extractInitials(){
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    const matches = userObj.user.name.match(/\b(\w)/g); 
+    const matches = userObj.user?.name.match(/\b(\w)/g); 
     const acronym = matches?.join('');
     return acronym;
   }
