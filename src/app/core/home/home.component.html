@@ -4,7 +4,7 @@
         <div class="col-12 col-lg-5 col-md-10 col-sm-11">
             <div *ngFor="let post of postsArray?.slice()?.reverse(); trackBy: postTrackBy">
                 <div class="d-flex align-items-center gap-2">
-                    <div class="profileImage">{{extractInitials(post.postedBy.name)}}</div>
+                    <div class="profileImage">{{extract(post.postedBy.name)}}</div>
                     <div (click)="navigateToUserProfile(post)" class="username">{{post.postedBy.name}}</div>
                     <span class="example-spacer"></span>
                     <mat-icon style="cursor:pointer" [matMenuTriggerFor]="menu"

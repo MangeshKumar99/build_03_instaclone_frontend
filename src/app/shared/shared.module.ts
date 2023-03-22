@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { DialogComponent } from './dialog/dialog.component';
     MatProgressSpinnerModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   exports:[
     MatToolbarModule,
@@ -41,7 +42,7 @@ import { DialogComponent } from './dialog/dialog.component';
     ReactiveFormsModule,
     HeaderComponent,
     DialogComponent,
-    MatDialogModule
+    MatDialogModule,
   ]
 })
 export class SharedModule { }

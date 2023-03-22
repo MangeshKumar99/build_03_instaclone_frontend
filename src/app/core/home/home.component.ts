@@ -115,10 +115,8 @@ export class HomeComponent implements OnInit {
     const obj={likes:data};
     this.router.navigate(['home/user/dashboard',obj]);
   }
-  extractInitials(name:string){
-      const matches = name.match(/\b(\w)/g); 
-      const acronym = matches?.join('');
-      return acronym;
+  extract(name: string) {
+    return this.instaService.extractInitials(name);
   }
   postTrackBy(index:number,post:Result){
     return post._id;

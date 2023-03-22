@@ -13,9 +13,11 @@ import { User } from '../interfaces/user';
 export class HeaderComponent implements OnInit {
 
   filteredOptions:User[]=[];
+  loggedInUserName!:string;
   constructor(private router:Router, private instaService:InstaService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.loggedInUserName = JSON.parse(localStorage.getItem('user') || '{}').user?.name;
   }
 
   navigateToCreateUpdatePost(){
@@ -59,11 +61,8 @@ export class HeaderComponent implements OnInit {
   navigateToHome(){
     this.router.navigate(['home']);
   }
-  extractInitials(){
-    const userObj = JSON.parse(localStorage.getItem('user') || '{}');
-    const matches = userObj.user?.name.match(/\b(\w)/g); 
-    const acronym = matches?.join('');
-    return acronym;
+  extract(name:string){
+   return this.instaService.extractInitials(name);
   }
 }
 

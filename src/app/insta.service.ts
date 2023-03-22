@@ -61,4 +61,9 @@ export class InstaService {
   searchUsersByName(userId:string,userName:string):Observable<any>{
     return this.http.get(`${this.COMMON_URL}/user/search/${userId}/${userName}`);
   }
+  extractInitials(name:string){
+    const matches = name?.match(/\b(\w)/g); 
+    const acronym = matches?.join('');
+    return acronym;
+}
 }

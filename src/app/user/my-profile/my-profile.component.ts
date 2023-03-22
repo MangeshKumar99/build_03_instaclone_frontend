@@ -70,10 +70,8 @@ export class MyProfileComponent implements OnInit {
   navigateToDashboard(data: any) {
     this.router.navigate(['home/user/dashboard', data]);
   }
-  extractInitials(name: any) {
-    const matches = name?.match(/\b(\w)/g);
-    const acronym = matches?.join('');
-    return acronym;
+  extract(name: any) {
+    this.instaService.extractInitials(name);
   }
   openDialog(imageurl: string) {
     const dialogRef = this.dialog.open(DialogComponent, {
