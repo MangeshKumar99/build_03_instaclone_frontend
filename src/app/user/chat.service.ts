@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { io } from 'socket.io-client';
 import { Chat } from '../shared/interfaces/chat';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  socket = io("http://localhost:1313");
+  COMMON_URL= environment.COMMON_URL;
+  socket = io(this.COMMON_URL,{
+    transports:['websockets'],
+  });
   message$: BehaviorSubject<Chat> = new BehaviorSubject({ message: "", name: "" });
   constructor() {
   }
