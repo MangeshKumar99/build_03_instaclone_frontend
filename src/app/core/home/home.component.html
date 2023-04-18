@@ -15,8 +15,8 @@
                     </mat-menu>
                 </div>
                 <img class="img-fluid pt-1 userpost" src="{{post.photo}}" />
-                <mat-icon style="cursor: pointer;" *ngIf="post.likes.includes(loggedInUser)" (click)="updateLikes(post._id)" class="pt-1 red-icon">favorite_border</mat-icon>
-                <mat-icon style="cursor: pointer;" *ngIf="!post.likes.includes(loggedInUser)" (click)="updateLikes(post._id)" class="pt-1">favorite_border</mat-icon>
+                <img class="heart-icon" *ngIf="post.likes.includes(loggedInUser)" (click)="updateLikes(post._id)" src="https://img.icons8.com/color/100/null/hearts.png"/>
+                <img  class="heart-icon" *ngIf="!post.likes.includes(loggedInUser)" (click)="updateLikes(post._id)"src="https://img.icons8.com/ios/50/null/hearts--v1.png"/>
                 <div *ngIf="post.likes.length==1" style="cursor:pointer;" (click)="navigateToDashboard(post.likes)">{{post.likes.length}}&nbsp;like</div>
                 <div  *ngIf="post.likes.length>1"  style="cursor:pointer;" (click)="navigateToDashboard(post.likes)">{{post.likes.length}}&nbsp;likes</div>
                 <div class="d-inline align-items-center gap-2">

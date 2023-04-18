@@ -71,7 +71,7 @@ export class MyProfileComponent implements OnInit {
     this.router.navigate(['home/user/dashboard', data]);
   }
   extract(name: any) {
-    this.instaService.extractInitials(name);
+   return  this.instaService.extractInitials(name);
   }
   openDialog(imageurl: string) {
     const dialogRef = this.dialog.open(DialogComponent, {
