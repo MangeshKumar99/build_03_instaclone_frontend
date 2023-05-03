@@ -10,9 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ChatService {
   COMMON_URL= environment.COMMON_URL;
-  socket = io(this.COMMON_URL,{
-    transports:['websockets'],
-  });
+  socket = io("http://localhost:1313");
   message$: BehaviorSubject<Chat> = new BehaviorSubject({ message: "", name: "" });
   constructor() {
   }
