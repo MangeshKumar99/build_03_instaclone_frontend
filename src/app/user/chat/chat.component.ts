@@ -17,7 +17,11 @@ export class ChatComponent implements OnInit {
   messageForm = this.fb.group({
     message: ['', Validators.required]
   });
+  joinForm = this.fb.group({
+    group: ['', Validators.required]
+  });
   ngOnInit(): void {
+    this.chatService.socket.connect();
     this.chatService.getNewMessage().subscribe((msg: Chat) => {
       if (msg.message != "") this.chatArray.push(msg);
     })
@@ -26,6 +30,13 @@ export class ChatComponent implements OnInit {
   onSubmit() {
     this.chatService.sendMessage({ message: this.messageForm.value.message, name: JSON.parse(localStorage.getItem('user') || '{}').user.name });
     this.messageForm.reset();
+  }
+  joinGroup(){
+    this.chatService.socket.emit('create',this.joinForm.value.group);
+    this.joinForm.reset();
+  }
+  ngOnDestroy(){
+    this.chatService.socket.disconnect();
   }
 
 }
