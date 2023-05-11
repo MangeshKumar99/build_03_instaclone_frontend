@@ -13,7 +13,9 @@ export class ChatComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private chatService: ChatService, private toastr: ToastrService) { }
   chatArray: Chat[] = [];
-  userConnected: any;
+  groupName: string = '';
+  typingMessage: string = '';
+  loggedInUser: string = JSON.parse(localStorage.getItem('user') || '{}').user.name;
   messageForm = this.fb.group({
     message: ['', Validators.required]
   });
@@ -23,7 +25,16 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.chatService.socket.connect();
     this.chatService.getNewMessage().subscribe((msg: Chat) => {
-      if (msg.message != "") this.chatArray.push(msg);
+      if (msg.message !=="") this.chatArray.push(msg);
+    })
+    this.chatService.getNotification().subscribe((alert:string)=>{
+      if(alert !== "") this.toastr.info(alert);
+    })
+    this.chatService.getTypingNotification().subscribe((data: any)=>{
+      if(data.message !== "") this.typingMessage = data;
+      setTimeout(()=>{
+        this.typingMessage = '';
+      },3000)
     })
   }
 
@@ -32,11 +43,22 @@ export class ChatComponent implements OnInit {
     this.messageForm.reset();
   }
   joinGroup(){
+    this.groupName = this.joinForm.value.group;
     this.chatService.socket.emit('create',this.joinForm.value.group);
+    this.chatService.sendNotification(`${JSON.parse(localStorage.getItem('user') || '{}').user.name} joined ${this.groupName}`);
     this.joinForm.reset();
   }
   ngOnDestroy(){
+    this.chatService.sendMessage({message:"",name:""});
+    this.chatService
     this.chatService.socket.disconnect();
   }
-
+  leaveGroup(){
+    this.chatService.socket.emit('destroy',this.groupName);
+    this.chatService.sendNotification(`${JSON.parse(localStorage.getItem('user') || '{}').user.name} left ${this.groupName}`);
+    this.groupName = '';
+  }
+  onChange(e:any){
+    this.chatService.sendTypingNotification({room:this.groupName,message:`${JSON.parse(localStorage.getItem('user') || '{}').user.name} is typing`})
+  }
 }

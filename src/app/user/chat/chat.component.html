@@ -3,7 +3,7 @@
     <div class="row pt-5">
         <div class="col-12 col-lg-5">
             <form [formGroup]="joinForm" (ngSubmit)="joinGroup()" class="form-container">
-                <div class="form-group mb-2">
+                <div *ngIf="groupName === ''" class="form-group mb-2">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" formControlName="group" placeholder="Type group name..."
                             autocomplete="off">
@@ -12,25 +12,34 @@
                     </div>
                 </div>
             </form>
+            <div *ngIf="groupName !== ''" class="card">
+                <div class="card-header">
+                 {{groupName}}
+                </div>
+                <div class="card-body">
+                  <button (click)="leaveGroup()" href="#" class="btn btn-danger">Leave Group</button>
+                </div>
+              </div>
         </div>
-        <div class="chat-container col-12 col-lg-7 d-flex flex-column justify-content-between">
+        <div *ngIf="groupName !== ''" class="chat-container col-12 col-lg-7 d-flex flex-column justify-content-between mt-4 mt-lg-0 mt-md-2">
             <div class="chat-message-container pt-4">
-                <div *ngFor="let msg of chatArray" class="message">
-                    <small class="text-warning">{{msg.name}}</small>
+                <div [ngClass]="{left : loggedInUser === msg.name, right : loggedInUser !== msg.name}"  *ngFor="let msg of chatArray" class="message">
+                    <small  class="text-warning">{{msg.name}}</small>
                     <div>{{msg.message}}</div>
                 </div>
             </div>
+       
             <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" class="form-container">
-                <div class="form-group mb-2">
+                <span class="fst-italic" *ngIf="typingMessage !== ''">{{typingMessage}}...</span>
+                <div class="form-group mb- pt-2">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" formControlName="message" placeholder="Message..."
+                        <input (ngModelChange)="onChange($event)" type="text" class="form-control" formControlName="message" placeholder="Message..."
                             autocomplete="off">
                         <button [ngClass]="{'enabled': messageForm.valid, 'disabled' : !messageForm.valid }"
                             type="submit" class="input-group-text">Send</button>
                     </div>
                 </div>
             </form>
-        </div>
-        
+        </div>  
     </div>
 </div>
