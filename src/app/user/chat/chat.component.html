@@ -1,30 +1,21 @@
 <app-header></app-header>
 <div class="container pt-5">
     <div class="row pt-5">
-        <div class="col-12 col-lg-5">
-            <form [formGroup]="joinForm" (ngSubmit)="joinGroup()" class="form-container">
-                <div *ngIf="groupName === ''" class="form-group mb-2">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" formControlName="group" placeholder="Type group name..."
-                            autocomplete="off">
-                        <button [ngClass]="{'enabled': joinForm.valid, 'disabled' : !joinForm.valid }"
-                            type="submit" class="input-group-text">Join Group</button>
+        <div class="col-12 col-lg-5 user-container">
+           <div (click)="onUserRowClick(user._id)" class="user-card" *ngFor="let user of usersArray">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="profileImage">{{extract(user.name)}}</div>
                     </div>
+                    <div class="col-10">{{user.name}}</div>
                 </div>
-            </form>
-            <div *ngIf="groupName !== ''" class="card">
-                <div class="card-header">
-                 {{groupName}}
-                </div>
-                <div class="card-body">
-                  <button (click)="leaveGroup()" href="#" class="btn btn-danger">Leave Group</button>
-                </div>
-              </div>
+                <hr style="background-color: #667781;">
+           </div>
         </div>
-        <div *ngIf="groupName !== ''" class="chat-container col-12 col-lg-7 d-flex flex-column justify-content-between mt-4 mt-lg-0 mt-md-2">
+        <div class="chat-container col-12 col-lg-7 d-flex flex-column justify-content-between mt-4 mt-lg-0 mt-md-2">
             <div class="chat-message-container pt-4">
-                <div [ngClass]="{left : loggedInUser === msg.name, right : loggedInUser !== msg.name}"  *ngFor="let msg of chatArray" class="message">
-                    <small  class="text-warning">{{msg.name}}</small>
+                <div *ngFor="let msg of chatHistory" class="message">
+                    <small class="text-warning">{{msg.name}}</small>
                     <div>{{msg.message}}</div>
                 </div>
             </div>

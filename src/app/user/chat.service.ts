@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { io } from 'socket.io-client';
 import { Chat } from '../shared/interfaces/chat';
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class ChatService {
   message$: BehaviorSubject<Chat> = new BehaviorSubject({ message: "", name: "" });
   notification$: BehaviorSubject<string> = new BehaviorSubject('');
   typing$: BehaviorSubject<any> = new BehaviorSubject({room:"",message:""});
-  constructor() {
+  constructor(private http:HttpClient) {
   }
 
   sendMessage(message: Chat) {
@@ -47,6 +48,22 @@ export class ChatService {
   }
   sendTypingNotification(alert: any) {
     this.socket.emit('typing', alert);
+  }
+
+  getAllUsers(userId:string){
+    return this.http.get(`${this.COMMON_URL}users/${userId}`);
+  }
+
+  createChat(userId:string,selectedId:string){
+    return this.http.post(`${this.COMMON_URL}chat/create/${userId}`,{chatWith:selectedId});
+  }
+  
+  isChatExists(userId:string,selectedId:string){
+    return this.http.get(`${this.COMMON_URL}chat/check/${userId}/${selectedId}`);
+  }
+
+  saveMessage(userId:string,chatId:string,message: Chat){
+    return this.http.post(`${this.COMMON_URL}chat/save/${userId}/${chatId}`,message);
   }
 
 }

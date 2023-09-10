@@ -61,7 +61,6 @@ export class CreateUpdatePostComponent implements OnInit {
     formData.append("title", this.createPostForm.value.title);
     formData.append("description", this.createPostForm.value.description);
     formData.append("photo", this.photo);
-    console.log(this.photo,"***");
     const userObj = JSON.parse(localStorage.getItem('user') || '{}');
     if(this.postId){
       //update
